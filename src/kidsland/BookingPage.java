@@ -24,7 +24,15 @@ public class BookingPage extends javax.swing.JFrame {
      */
     public BookingPage() {
         initComponents();
-        loadImage("Nicolas");
+        loadImage("2");
+        loadImage("3");
+        loadImage("4");
+        loadImage("5");
+        loadImage("6");
+        loadImage("7");
+        loadImage("8");
+        loadImage("9");
+        loadImage("10");
     }
 
     /**
@@ -39,15 +47,15 @@ public class BookingPage extends javax.swing.JFrame {
         jScrollBar1 = new javax.swing.JScrollBar();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
-        photo = new javax.swing.JLabel();
+        photo2 = new javax.swing.JLabel();
+        photo3 = new javax.swing.JLabel();
+        photo4 = new javax.swing.JLabel();
+        photo5 = new javax.swing.JLabel();
+        photo6 = new javax.swing.JLabel();
+        photo7 = new javax.swing.JLabel();
+        photo8 = new javax.swing.JLabel();
+        photo9 = new javax.swing.JLabel();
+        photo1 = new javax.swing.JLabel();
         jSpinner1 = new javax.swing.JSpinner();
         jComboBox2 = new javax.swing.JComboBox<>();
         jSpinner2 = new javax.swing.JSpinner();
@@ -79,29 +87,29 @@ public class BookingPage extends javax.swing.JFrame {
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/kidsland/LogoKidsLand.png"))); // NOI18N
         jLabel2.setText("jLabel2");
 
-        jLabel3.setText("jLabel3");
+        photo2.setText("jLabel3");
 
-        jLabel4.setText("jLabel3");
+        photo3.setText("jLabel3");
 
-        jLabel5.setText("jLabel3");
+        photo4.setText("jLabel3");
 
-        jLabel6.setText("jLabel3");
+        photo5.setText("jLabel3");
 
-        jLabel7.setText("jLabel3");
+        photo6.setText("jLabel3");
 
-        jLabel8.setText("jLabel3");
+        photo7.setText("jLabel3");
 
-        jLabel9.setText("jLabel3");
+        photo8.setText("jLabel3");
 
-        jLabel10.setText("jLabel3");
+        photo9.setText("jLabel3");
 
-        photo.setText("jLabel3");
-        photo.addInputMethodListener(new java.awt.event.InputMethodListener() {
+        photo1.setText("jLabel3");
+        photo1.addInputMethodListener(new java.awt.event.InputMethodListener() {
             public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
-                photoCaretPositionChanged(evt);
+                photo1CaretPositionChanged(evt);
             }
             public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
-                photoInputMethodTextChanged(evt);
+                photo1InputMethodTextChanged(evt);
             }
         });
 
@@ -171,8 +179,8 @@ public class BookingPage extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(40, 40, 40)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(photo, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(photo1, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(photo4, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jSpinner4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jComboBox5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(layout.createSequentialGroup()
@@ -185,14 +193,14 @@ public class BookingPage extends javax.swing.JFrame {
                                 .addGap(156, 156, 156)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(photo2, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(32, 32, 32)
-                                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(photo3, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(149, 149, 149)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(photo5, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jSpinner2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jSpinner5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -201,16 +209,16 @@ public class BookingPage extends javax.swing.JFrame {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jSpinner3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jComboBox4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(photo6, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jSpinner6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jComboBox7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(79, 79, 79)
-                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(photo7, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(photo8, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(photo9, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(71, 71, 71)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -234,9 +242,9 @@ public class BookingPage extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 96, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(photo, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(photo1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(photo2, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(photo3, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 104, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -254,9 +262,9 @@ public class BookingPage extends javax.swing.JFrame {
                                 .addComponent(jSpinner3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(photo4, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(photo5, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(photo6, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -273,9 +281,9 @@ public class BookingPage extends javax.swing.JFrame {
                         .addComponent(jSpinner6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(32, 32, 32)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(photo7, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(photo8, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(photo9, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -321,16 +329,16 @@ public class BookingPage extends javax.swing.JFrame {
         this.setVisible(true);
     }//GEN-LAST:event_jMenu3ActionPerformed
 
-    private void photoInputMethodTextChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_photoInputMethodTextChanged
+    private void photo1InputMethodTextChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_photo1InputMethodTextChanged
         // TODO add your handling code here:
-    }//GEN-LAST:event_photoInputMethodTextChanged
+    }//GEN-LAST:event_photo1InputMethodTextChanged
 
-    private void photoCaretPositionChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_photoCaretPositionChanged
+    private void photo1CaretPositionChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_photo1CaretPositionChanged
         // TODO add your handling code here:
-    }//GEN-LAST:event_photoCaretPositionChanged
+    }//GEN-LAST:event_photo1CaretPositionChanged
 
     private void loadImage(String employeeName) {
-    String query = "SELECT photo FROM employee WHERE Name = ?";
+    String query = "SELECT photo FROM ride WHERE id = ?";
     try {
         Connection conn = Mysqlc.mycon();
         PreparedStatement pstmt = conn.prepareStatement(query);
@@ -342,7 +350,15 @@ public class BookingPage extends javax.swing.JFrame {
                 ByteArrayInputStream bis = new ByteArrayInputStream(imgBytes);
                 Image image = ImageIO.read(bis);
                 ImageIcon imageIcon = new ImageIcon(image);
-                photo.setIcon(imageIcon); // Utilisez le JLabel nommé "photo"
+                photo1.setIcon(imageIcon); // Utilisez le JLabel nommé "photo"
+                photo2.setIcon(imageIcon);
+                photo3.setIcon(imageIcon);
+                photo4.setIcon(imageIcon);
+                photo5.setIcon(imageIcon);
+                photo6.setIcon(imageIcon);
+                photo7.setIcon(imageIcon);
+                photo8.setIcon(imageIcon);
+                photo9.setIcon(imageIcon);
             } else {
                 JOptionPane.showMessageDialog(rootPane, "No image found for this employee");
             }
@@ -400,15 +416,7 @@ public class BookingPage extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> jComboBox8;
     private javax.swing.JComboBox<String> jComboBox9;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
@@ -424,6 +432,14 @@ public class BookingPage extends javax.swing.JFrame {
     private javax.swing.JSpinner jSpinner7;
     private javax.swing.JSpinner jSpinner8;
     private javax.swing.JSpinner jSpinner9;
-    private javax.swing.JLabel photo;
+    private javax.swing.JLabel photo1;
+    private javax.swing.JLabel photo2;
+    private javax.swing.JLabel photo3;
+    private javax.swing.JLabel photo4;
+    private javax.swing.JLabel photo5;
+    private javax.swing.JLabel photo6;
+    private javax.swing.JLabel photo7;
+    private javax.swing.JLabel photo8;
+    private javax.swing.JLabel photo9;
     // End of variables declaration//GEN-END:variables
 }
