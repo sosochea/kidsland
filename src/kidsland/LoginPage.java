@@ -225,7 +225,7 @@ public class LoginPage extends javax.swing.JFrame {
         String ps = new String(jPass.getPassword());
 
         try {
-            String sql = "SELECT * FROM customer WHERE Email = ? AND Password = ?";
+            String sql = "SELECT * FROM people WHERE mail = ? AND mot_de_passe = ?";
             pst = con.prepareStatement(sql);
 
             pst.setString(1, un);

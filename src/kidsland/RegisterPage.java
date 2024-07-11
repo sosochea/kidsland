@@ -219,7 +219,7 @@ public class RegisterPage extends javax.swing.JFrame {
         String ps = jPW.getText();
         String bd = jBD.getText(); 
 
-        String query = "INSERT INTO customer (Name, Email, Password, Type) VALUES (?, ?, ?, 'Guest')";
+        String query = "INSERT INTO people (nom, mail, mot_de_passe) VALUES (?, ?, ?)";
 
         try {
             Connection conn = Mysqlc.mycon(); 

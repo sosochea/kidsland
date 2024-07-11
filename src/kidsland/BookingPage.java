@@ -24,15 +24,15 @@ public class BookingPage extends javax.swing.JFrame {
      */
     public BookingPage() {
         initComponents();
-        loadImage("2");
-        loadImage("3");
-        loadImage("4");
-        loadImage("5");
-        loadImage("6");
-        loadImage("7");
-        loadImage("8");
-        loadImage("9");
-        loadImage("10");
+        loadImage("2", photo1);
+        loadImage("3", photo2);
+        loadImage("4", photo3);
+        loadImage("5", photo4);
+        loadImage("6", photo5);
+        loadImage("7", photo6);
+        loadImage("8", photo7);
+        loadImage("9", photo8);
+        loadImage("10", photo9);
     }
 
     /**
@@ -337,36 +337,43 @@ public class BookingPage extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_photo1CaretPositionChanged
 
-    private void loadImage(String employeeName) {
-    String query = "SELECT photo FROM ride WHERE id = ?";
-    try {
-        Connection conn = Mysqlc.mycon();
-        PreparedStatement pstmt = conn.prepareStatement(query);
-        pstmt.setString(1, employeeName); // Utiliser une chaîne pour le paramètre
-        ResultSet rs = pstmt.executeQuery();
-        if (rs.next()) {
-            byte[] imgBytes = rs.getBytes("photo"); // Assurez-vous que la colonne s'appelle 'photo'
-            if (imgBytes != null) {
-                ByteArrayInputStream bis = new ByteArrayInputStream(imgBytes);
-                Image image = ImageIO.read(bis);
-                ImageIcon imageIcon = new ImageIcon(image);
-                photo1.setIcon(imageIcon); // Utilisez le JLabel nommé "photo"
-                photo2.setIcon(imageIcon);
-                photo3.setIcon(imageIcon);
-                photo4.setIcon(imageIcon);
-                photo5.setIcon(imageIcon);
-                photo6.setIcon(imageIcon);
-                photo7.setIcon(imageIcon);
-                photo8.setIcon(imageIcon);
-                photo9.setIcon(imageIcon);
+    private void loadImage(String employeeName, JLabel label) {
+        String query = "SELECT photo FROM ride WHERE id = ?";
+        Connection conn = null;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        try {
+            conn = Mysqlc.mycon();
+            if (conn != null) {
+                pstmt = conn.prepareStatement(query);
+                pstmt.setString(1, employeeName);
+                rs = pstmt.executeQuery();
+                if (rs.next()) {
+                    byte[] imgBytes = rs.getBytes("photo");
+                    if (imgBytes != null) {
+                        ByteArrayInputStream bis = new ByteArrayInputStream(imgBytes);
+                        Image image = ImageIO.read(bis);
+                        ImageIcon imageIcon = new ImageIcon(image);
+                        label.setIcon(imageIcon);
+                    } else {
+                        JOptionPane.showMessageDialog(rootPane, "No image found for this employee");
+                    }
+                }
             } else {
-                JOptionPane.showMessageDialog(rootPane, "No image found for this employee");
+                JOptionPane.showMessageDialog(rootPane, "Database connection failed.");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(rootPane, "Error when loading image: " + e.getMessage());
+        } finally {
+            try {
+                if (rs != null) rs.close();
+                if (pstmt != null) pstmt.close();
+                if (conn != null) conn.close();
+            } catch (Exception e) {
+                e.printStackTrace();
             }
         }
-    } catch (Exception e) {
-        e.printStackTrace();
-        JOptionPane.showMessageDialog(rootPane, "Error when loading image: " + e.getMessage());
-    }
 }
 
 
