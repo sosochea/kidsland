@@ -9,18 +9,22 @@ package kidsland;
  * @author Cheas
  */
 public class Ride {
-    private int rideId;
-    private String name;
-    private String description;
-    private double price;
-    private String availabilityStatus;
+    public int rideId;
+    public String name;
+    public double price;
+    public int quantite;
+    public String availabilityStatus;
+    public byte[] photo;
+ 
+   
 
-    public Ride(int rideId, String name, String description, double price, String availabilityStatus) {
+    public Ride(int rideId, String name, double price, int quantite, String availabilityStatus, byte[] photo) {
         this.rideId = rideId;
         this.name = name;
-        this.description = description;
         this.price = price;
+        this.quantite = quantite;
         this.availabilityStatus = availabilityStatus;
+        this.photo = photo;
     }
 
     public boolean getAvailability() {

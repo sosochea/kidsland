@@ -24,6 +24,7 @@ public class BookingPage extends javax.swing.JFrame {
      */
     public BookingPage() {
         initComponents();
+   
         loadImage("2", photo1);
         loadImage("3", photo2);
         loadImage("4", photo3);
