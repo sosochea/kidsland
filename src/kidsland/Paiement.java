@@ -18,13 +18,15 @@ public class Paiement {
     public String numeroDeCarte;
     public Date dateExpiration;
     public String cvv;
+    private String nomCarte;
 
-    public Paiement(int Paiementid, int PanierPrincipalid, double prixFinal, String numeroDeCarte, Date dateExpiration, String cvv) {
+    public Paiement(int Paiementid, int PanierPrincipalid, double prixFinal, String numeroDeCarte, Date dateExpiration, String cvv, String nomCarte) {
         this.Paiementid = Paiementid;
         this.PanierPrincipalid = PanierPrincipalid;
         this.prixFinal = prixFinal;
         this.numeroDeCarte = numeroDeCarte;
         this.dateExpiration = dateExpiration;
         this.cvv = cvv;
+        this.nomCarte = nomCarte;
     }
 }

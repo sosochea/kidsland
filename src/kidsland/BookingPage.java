@@ -24,7 +24,10 @@ public class BookingPage extends javax.swing.JFrame {
      */
     public BookingPage() {
         initComponents();
+<<<<<<< Updated upstream
         setExtendedState(JFrame.MAXIMIZED_BOTH);
+=======
+>>>>>>> Stashed changes
 
         loadImage("2", photo1);
         loadImage("3", photo2);
