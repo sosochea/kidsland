@@ -1,4 +1,5 @@
 package kidsland;
+import java.time.LocalDate;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -26,8 +27,20 @@ public class People {
         this.motDePasse = motDePasse;
         this.anneeNaissance = anneeNaissance;
         this.role = role;
-        this.discount = discount;
+        this.discount = calculateDiscount(anneeNaissance)   ;
         this.photo = photo;
+    }
+
+       
+    private double calculateDiscount(int anneeNaissance) {
+        int age = LocalDate.now().getYear() - anneeNaissance;
+        if (age < 18) {
+            return 20.0; // Réduction de 20% pour les moins de 18 ans
+        } else if (age >= 60) {
+            return 15.0; // Réduction de 15% pour les plus de 60 ans
+        } else {
+            return 10.0; // Réduction de 10% pour les autres
+        }
     }
 
 }
