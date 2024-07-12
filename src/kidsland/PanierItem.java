@@ -16,11 +16,13 @@ public class PanierItem {
     public int PanierPrincipalid;
     public int rideId;
     public Date date;
+    public int quantite;
 
-    public PanierItem(int PanierItemid, int PanierPrincipalid, int idRide, Date date) {
+    public PanierItem(int PanierItemid, int PanierPrincipalid, int idRide, Date date, int quantite) {
         this.PanierItemid = PanierItemid;
         this.PanierPrincipalid = PanierPrincipalid;
         this.rideId = rideId;
         this.date = date;
+        this.quantite = quantite;
     }
 }
