@@ -211,7 +211,7 @@ public class PaymentPage extends javax.swing.JFrame {
 
         java.sql.Date sqlDate = new java.sql.Date(selectedDate.getTime());
 
-        String query = "INSERT INTO paiement (numero_de_carte, date_expiration, cvv) VALUES (?, ?, ?)";
+        String query = "INSERT INTO paiement (numero_de_carte, date_expiration, cvv, nom_carte) VALUES (?, ?, ?, ?)";
 
         try {
             Connection conn = Mysqlc.mycon(); 
@@ -220,6 +220,7 @@ public class PaymentPage extends javax.swing.JFrame {
             pstmt.setString(1, cn);
             pstmt.setDate(2, sqlDate);
             pstmt.setString(3, cvv);
+            pstmt.setString(4, hn);
             
             pstmt.executeUpdate();
             
