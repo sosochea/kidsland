@@ -15,6 +15,9 @@ import javax.swing.JOptionPane;
  * @author Cheas
  */
 public class PaymentPage extends javax.swing.JFrame {
+    
+    private int idPanier;
+    private double totalPrice;
 
     /**
      * Creates new form PaymentPage
@@ -22,6 +25,13 @@ public class PaymentPage extends javax.swing.JFrame {
     public PaymentPage() {
         initComponents();
     }
+    
+    public PaymentPage(int idPanier, double totalPrice) {
+        this.idPanier = idPanier;
+        this.totalPrice = totalPrice; // Stockez totalPrice
+        initComponents();
+        TotalPrice.setText("Total: " + totalPrice + " €"); // Affichez totalPrice dans le JLabel
+}
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -42,7 +52,7 @@ public class PaymentPage extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
+        TotalPrice = new javax.swing.JLabel();
         jED = new com.toedter.calendar.JDateChooser();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
@@ -84,12 +94,12 @@ public class PaymentPage extends javax.swing.JFrame {
 
         jLabel6.setText("Payment Details");
 
-        jLabel7.setText("jLabel7");
-        jLabel7.addInputMethodListener(new java.awt.event.InputMethodListener() {
+        TotalPrice.setText("TOTAL $$");
+        TotalPrice.addInputMethodListener(new java.awt.event.InputMethodListener() {
             public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
             }
             public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
-                jLabel7InputMethodTextChanged(evt);
+                TotalPriceInputMethodTextChanged(evt);
             }
         });
 
@@ -155,11 +165,11 @@ public class PaymentPage extends javax.swing.JFrame {
                         .addGap(162, 162, 162))
                     .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 464, javax.swing.GroupLayout.PREFERRED_SIZE)))
             .addGroup(layout.createSequentialGroup()
-                .addGap(190, 190, 190)
+                .addGap(200, 200, 200)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(TotalPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton1))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(200, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -185,7 +195,7 @@ public class PaymentPage extends javax.swing.JFrame {
                         .addComponent(jCVV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jED, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(26, 26, 26)
-                .addComponent(jLabel7)
+                .addComponent(TotalPrice)
                 .addGap(18, 18, 18)
                 .addComponent(jButton1)
                 .addGap(28, 28, 28))
@@ -195,46 +205,42 @@ public class PaymentPage extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        
-        String hn = jHN.getText();
-        String cn = jCN.getText();
-        String cvv = jCVV.getText();
+         // Récupérez les informations du formulaire
+    String hn = jHN.getText();
+    String cn = jCN.getText();
+    String cvv = jCVV.getText();
+    Date selectedDate = jED.getDate();
+    if (selectedDate == null) {
+        JOptionPane.showMessageDialog(rootPane, "Please select a date.");
+        return;
+    }
+    java.sql.Date sqlDate = new java.sql.Date(selectedDate.getTime());
 
-        
-        Date selectedDate = jED.getDate();
-        
-        if (selectedDate == null) {
-            JOptionPane.showMessageDialog(rootPane, "Please select a date.");
-            return;
-        }
+    // Insérez les informations dans la table paiement avec idPanier
+    String query = "INSERT INTO paiement (idPanier, numero_de_carte, date_expiration, cvv, nom_carte, prixFinal) VALUES (?, ?, ?, ?, ?, ?)";
 
-        java.sql.Date sqlDate = new java.sql.Date(selectedDate.getTime());
+    try {
+        Connection conn = Mysqlc.mycon();
+        PreparedStatement pstmt = conn.prepareStatement(query);
+        pstmt.setInt(1, idPanier); // Utilisez idPanier
+        pstmt.setString(2, cn);
+        pstmt.setDate(3, sqlDate);
+        pstmt.setString(4, cvv);
+        pstmt.setString(5, hn);
+        pstmt.setDouble(6, totalPrice); // Utilisez totalPrice
+        pstmt.executeUpdate();
 
-        String query = "INSERT INTO paiement (numero_de_carte, date_expiration, cvv, nom_carte) VALUES (?, ?, ?, ?)";
+        JOptionPane.showMessageDialog(rootPane, "Your payment has been validated!");
 
-        try {
-            Connection conn = Mysqlc.mycon(); 
-            PreparedStatement pstmt = conn.prepareStatement(query);
-            
-            pstmt.setString(1, cn);
-            pstmt.setDate(2, sqlDate);
-            pstmt.setString(3, cvv);
-            pstmt.setString(4, hn);
-            
-            pstmt.executeUpdate();
-            
-            JOptionPane.showMessageDialog(rootPane, "Your payment has been validated !");
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-            JOptionPane.showMessageDialog(rootPane, "Error during payment : " + e.getMessage());
-        } finally {
-            jHN.setText("");
-            jCN.setText("");
-            jCVV.setText("");
-            jED.setDate(null); // Reset the date chooser
-        }
+    } catch (SQLException e) {
+        e.printStackTrace();
+        JOptionPane.showMessageDialog(rootPane, "Error during payment: " + e.getMessage());
+    } finally {
+        jHN.setText("");
+        jCN.setText("");
+        jCVV.setText("");
+        jED.setDate(null); // Reset the date chooser
+    }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jMenu1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu1ActionPerformed
@@ -266,10 +272,10 @@ public class PaymentPage extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jCNActionPerformed
 
-    private void jLabel7InputMethodTextChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_jLabel7InputMethodTextChanged
+    private void TotalPriceInputMethodTextChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_TotalPriceInputMethodTextChanged
         // TODO add your handling code here:
         
-    }//GEN-LAST:event_jLabel7InputMethodTextChanged
+    }//GEN-LAST:event_TotalPriceInputMethodTextChanged
 
     private void jHNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jHNActionPerformed
         // TODO add your handling code here:
@@ -312,6 +318,7 @@ public class PaymentPage extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel TotalPrice;
     private javax.swing.JButton jButton1;
     private javax.swing.JTextField jCN;
     private javax.swing.JTextField jCVV;
@@ -323,7 +330,6 @@ public class PaymentPage extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
