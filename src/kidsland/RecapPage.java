@@ -33,8 +33,9 @@ public class RecapPage extends javax.swing.JFrame {
     this.idPanier = idPanier;
     this.totalPrice = totalPrice;
     initComponents();
+    String userEmail = Session.getUserEmail();
     // Affichez totalPrice dans le JLabel approprié
-    jTP.setText("Total: " + totalPrice + " €");
+    jTP.setText("" + totalPrice + " €");
     
     loadName(2, jRIDE1);
     loadName(3, jRIDE2);
@@ -45,6 +46,41 @@ public class RecapPage extends javax.swing.JFrame {
     loadName(8, jRIDE7);
     loadName(9, jRIDE8);
     loadName(10, jRIDE9);
+    
+    
+    loadRideQuantity(2, jBo1);
+    loadRideQuantity(3, jBo2);
+    loadRideQuantity(4, jBo3);
+    loadRideQuantity(5, jBo4);
+    loadRideQuantity(6, jBo5);
+    loadRideQuantity(7, jBo6);
+    loadRideQuantity(8, jBo7);
+    loadRideQuantity(9, jBo8);
+    loadRideQuantity(10, jBo9);
+    
+    
+    loadRidePrice(2, JTP1, jBo1);
+    loadRidePrice(3, JTP2, jBo2);
+    loadRidePrice(4, JTP3, jBo3);
+    loadRidePrice(5, JTP4, jBo4);
+    loadRidePrice(6, JTP5, jBo5);
+    loadRidePrice(7, JTP6, jBo6);
+    loadRidePrice(8, JTP7, jBo7);
+    loadRidePrice(9, JTP8, jBo8);
+    loadRidePrice(10, JTP9, jBo9);
+    
+    loadRidePPrice(2, jP1);
+    loadRidePPrice(3, jP2);
+    loadRidePPrice(4, jP3);
+    loadRidePPrice(5, jP4);
+    loadRidePPrice(6, jP5);
+    loadRidePPrice(7, jP6);
+    loadRidePPrice(8, jP7);
+    loadRidePPrice(9, jP8);
+    loadRidePPrice(10, jP9);
+    
+    loadUserDiscount();
+    calculateFinalPrice();
 }
 
 
@@ -105,6 +141,10 @@ public class RecapPage extends javax.swing.JFrame {
         JTP4 = new javax.swing.JLabel();
         JTP10 = new javax.swing.JLabel();
         jRIDE1 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jDiscount = new javax.swing.JLabel();
+        jT = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
@@ -174,7 +214,7 @@ public class RecapPage extends javax.swing.JFrame {
         jP10.setText("££");
         jP10.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 1, true));
 
-        jLabel2.setText("Total price:");
+        jLabel2.setText("Price :");
 
         jBo4.setText("0");
 
@@ -283,6 +323,14 @@ public class RecapPage extends javax.swing.JFrame {
 
         jRIDE1.setText("Attraction 1");
 
+        jLabel4.setText("Discount :");
+
+        jDiscount.setText("%%");
+
+        jT.setText("£££");
+
+        jLabel8.setText("Total Price :");
+
         jMenu1.setText("Welcome");
         jMenu1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -337,8 +385,8 @@ public class RecapPage extends javax.swing.JFrame {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jBo2, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jBo3, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jBo1, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(60, 60, 60)
+                                    .addComponent(jBo1, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(41, 41, 41)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jP4, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jP2, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -358,13 +406,18 @@ public class RecapPage extends javax.swing.JFrame {
                                         .addComponent(jRIDE6, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(jRIDE5, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGap(81, 81, 81)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jBo6, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jBo7, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jBo8, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jBo5, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jBo4, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGap(60, 60, 60)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                                .addComponent(jBo7, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                .addComponent(jBo8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                            .addGap(41, 41, 41))
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addComponent(jBo5, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(jBo4, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(jBo6, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addGap(50, 50, 50)))
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addComponent(jP8, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(jP6, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -382,9 +435,9 @@ public class RecapPage extends javax.swing.JFrame {
                                         .addComponent(jRIDE9, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGap(81, 81, 81)
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jBo9, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jBo10, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGap(60, 60, 60)
+                                        .addComponent(jBo10, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jBo9, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGap(41, 41, 41)
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addComponent(jP10, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(jP9, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -393,11 +446,18 @@ public class RecapPage extends javax.swing.JFrame {
                                         .addComponent(JTP10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(JTP9, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 68, Short.MAX_VALUE)
+                                        .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(jTP, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(jPay))))))
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(jTP, javax.swing.GroupLayout.DEFAULT_SIZE, 69, Short.MAX_VALUE)
+                                        .addComponent(jDiscount, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jT, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(jPay)
+                                    .addGap(6, 6, 6))))))
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -428,7 +488,7 @@ public class RecapPage extends javax.swing.JFrame {
                             .addComponent(jRIDE4)
                             .addComponent(jBo4)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 111, Short.MAX_VALUE)
+                        .addGap(0, 112, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(JTP4, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jP4, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -479,12 +539,20 @@ public class RecapPage extends javax.swing.JFrame {
                         .addComponent(JTP9, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(JTP10, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jTP)
-                    .addComponent(jPay))
-                .addGap(84, 84, 84))
+                    .addComponent(jTP))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(jDiscount))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jPay)
+                    .addComponent(jT)
+                    .addComponent(jLabel8))
+                .addGap(21, 21, 21))
         );
 
         pack();
@@ -517,9 +585,7 @@ public class RecapPage extends javax.swing.JFrame {
 
     private void jPayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPayActionPerformed
         // TODO add your handling code here:
-
-        new PaymentPage(idPanier, totalPrice).setVisible(true);
-        this.setVisible(false);
+        openPaymentPage();
     }//GEN-LAST:event_jPayActionPerformed
 
     private void loadName(int rideId, JLabel label) {
@@ -552,8 +618,172 @@ public class RecapPage extends javax.swing.JFrame {
         }
     }
 }
-
     
+    private void loadRideQuantity(int rideId, JLabel label) {
+    String query = "SELECT SUM(quantité) as totalQuantity FROM panieritem WHERE idPanier = ? AND idRide = ?";
+    Connection conn = null;
+    PreparedStatement pstmt = null;
+    ResultSet rs = null;
+    try {
+        conn = Mysqlc.mycon();
+        pstmt = conn.prepareStatement(query);
+        pstmt.setInt(1, this.idPanier);
+        pstmt.setInt(2, rideId);
+        rs = pstmt.executeQuery();
+
+        if (rs.next()) {
+            int totalQuantity = rs.getInt("totalQuantity");
+            label.setText(""+totalQuantity);
+        } else {
+            label.setText("0");
+        }
+    } catch (Exception e) {
+        e.printStackTrace();
+        JOptionPane.showMessageDialog(this, "Error when loading ride quantity: " + e.getMessage());
+    } finally {
+        try {
+            if (rs != null) rs.close();
+            if (pstmt != null) pstmt.close();
+            if (conn != null) conn.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+}
+    
+        private void loadRidePPrice(int rideId, JLabel labelPrice) {
+    String query = "SELECT prix FROM ride WHERE id = ?";
+    Connection conn = null;
+    PreparedStatement pstmt = null;
+    ResultSet rs = null;
+    try {
+        conn = Mysqlc.mycon();
+        pstmt = conn.prepareStatement(query);
+        pstmt.setInt(1, rideId);
+        rs = pstmt.executeQuery();
+
+        if (rs.next()) {
+            double ridePrice = rs.getDouble("prix");
+            labelPrice.setText("" + ridePrice + " €");
+        } else {
+            labelPrice.setText("Price: Not found");
+        }
+    } catch (Exception e) {
+        e.printStackTrace();
+        JOptionPane.showMessageDialog(this, "Error when loading ride price: " + e.getMessage());
+    } finally {
+        try {
+            if (rs != null) rs.close();
+            if (pstmt != null) pstmt.close();
+            if (conn != null) conn.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+}
+    
+    private void loadRidePrice(int rideId, JLabel labelPrice, JLabel labelQuantity) {
+    String query = "SELECT prix FROM ride WHERE id = ?";
+    Connection conn = null;
+    PreparedStatement pstmt = null;
+    ResultSet rs = null;
+    try {
+        conn = Mysqlc.mycon();
+        pstmt = conn.prepareStatement(query);
+        pstmt.setInt(1, rideId);
+        rs = pstmt.executeQuery();
+
+        if (rs.next()) {
+            double ridePrice = rs.getDouble("prix");
+            int quantity = Integer.parseInt(labelQuantity.getText().replace("Ride Quantity: ", "").trim());
+            double totalPrice = ridePrice * quantity;
+            labelPrice.setText("" + totalPrice + " €");
+        } else {
+            labelPrice.setText("Price: Not found");
+        }
+    } catch (Exception e) {
+        e.printStackTrace();
+        JOptionPane.showMessageDialog(this, "Error when loading ride price: " + e.getMessage());
+    } finally {
+        try {
+            if (rs != null) rs.close();
+            if (pstmt != null) pstmt.close();
+            if (conn != null) conn.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+}
+     
+     private void loadUserDiscount() {
+        String userEmail = Session.getUserEmail(); // Récupère l'email de l'utilisateur depuis la session
+        String query = "SELECT discount FROM people WHERE mail = ?";
+        Connection conn = null;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        
+        try {
+            conn = Mysqlc.mycon(); // Obtenez votre connexion MySQL
+            pstmt = conn.prepareStatement(query);
+            pstmt.setString(1, userEmail);
+            rs = pstmt.executeQuery();
+
+            if (rs.next()) {
+                double discount = rs.getDouble("discount");
+                // Affichez ou utilisez la valeur du discount comme bon vous semble
+                jDiscount.setText("" + discount + "%");
+            } else {
+                JOptionPane.showMessageDialog(this, "0");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Error when loading discount: " + e.getMessage());
+        } finally {
+            try {
+                if (rs != null) rs.close();
+                if (pstmt != null) pstmt.close();
+                if (conn != null) conn.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        
+    }
+
+     
+        private void calculateFinalPrice() {
+    try {
+        // Récupérer le prix total avant discount depuis le label jTP
+        String totalPriceText = jTP.getText().replace(" €", "");
+        double totalPriceBeforeDiscount = Double.parseDouble(totalPriceText);
+
+        // Récupérer le pourcentage de discount depuis le label jLabelDiscount
+        String discountText = jDiscount.getText().replace("%", "");
+        double discountPercentage = Double.parseDouble(discountText);
+
+        // Calculer le prix après discount
+        double discountAmount = totalPriceBeforeDiscount * (discountPercentage / 100);
+        double finalPrice = totalPriceBeforeDiscount - discountAmount;
+
+        // Afficher le prix final dans un label ou autre composant approprié
+        jT.setText("" + String.format("%.2f", finalPrice) + " €");
+    } catch (NumberFormatException e) {
+        JOptionPane.showMessageDialog(this, "Error in calculating final price: " + e.getMessage());
+    }
+    
+    
+}
+        private void openPaymentPage() {
+    try {
+        double finalPrice = Double.parseDouble(jT.getText().replace(" €", "").replace(",", "."));
+        new PaymentPage(idPanier, finalPrice).setVisible(true);
+        this.setVisible(false);
+    } catch (NumberFormatException e) {
+        JOptionPane.showMessageDialog(this, "Error in final price format: " + e.getMessage());
+    }
+}
+
+
     /**
      * @param args the command line arguments
      */
@@ -579,6 +809,7 @@ public class RecapPage extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(RecapPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        String userEmail;
         //</editor-fold>
 
         /* Create and display the form */
@@ -610,11 +841,14 @@ public class RecapPage extends javax.swing.JFrame {
     private javax.swing.JLabel jBo7;
     private javax.swing.JLabel jBo8;
     private javax.swing.JLabel jBo9;
+    private javax.swing.JLabel jDiscount;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
@@ -642,6 +876,7 @@ public class RecapPage extends javax.swing.JFrame {
     private javax.swing.JLabel jRIDE7;
     private javax.swing.JLabel jRIDE8;
     private javax.swing.JLabel jRIDE9;
+    private javax.swing.JLabel jT;
     private javax.swing.JLabel jTP;
     // End of variables declaration//GEN-END:variables
 }

@@ -196,7 +196,7 @@ public class BookingPage extends javax.swing.JFrame {
             }
         });
 
-        jPAY.setText("Pay");
+        jPAY.setText("RECAP");
         jPAY.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jPAYActionPerformed(evt);

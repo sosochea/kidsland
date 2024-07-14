@@ -17,7 +17,7 @@ import javax.swing.JOptionPane;
 public class PaymentPage extends javax.swing.JFrame {
     
     private int idPanier;
-    private double totalPrice;
+    private double finalPrice;
 
     /**
      * Creates new form PaymentPage
@@ -28,9 +28,9 @@ public class PaymentPage extends javax.swing.JFrame {
     
     public PaymentPage(int idPanier, double totalPrice) {
         this.idPanier = idPanier;
-        this.totalPrice = totalPrice; // Stockez totalPrice
+        this.finalPrice = totalPrice; // Stockez totalPrice
         initComponents();
-        TotalPrice.setText("Total: " + totalPrice + " €"); // Affichez totalPrice dans le JLabel
+        TotalPrice.setText("Total: " + finalPrice + " €"); // Affichez totalPrice dans le JLabel
 }
 
     /**
@@ -206,7 +206,7 @@ public class PaymentPage extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
             // Récupérez les informations du formulaire
-    String hn = jHN.getText();
+     String hn = jHN.getText();
     String cn = jCN.getText();
     String cvv = jCVV.getText();
     Date selectedDate = jED.getDate();
@@ -217,7 +217,7 @@ public class PaymentPage extends javax.swing.JFrame {
     java.sql.Date sqlDate = new java.sql.Date(selectedDate.getTime());
 
     // Insérez les informations dans la table paiement avec idPanier
-    String query = "INSERT INTO paiement (idPanier, numero_de_carte, date_expiration, cvv, nom_carte, total_price) VALUES (?, ?, ?, ?, ?, ?)";
+    String query = "INSERT INTO paiement (idPanier, numero_de_carte, date_expiration, cvv, nom_carte, prixFinal) VALUES (?, ?, ?, ?, ?, ?)";
     try {
         Connection conn = Mysqlc.mycon();
         PreparedStatement pstmt = conn.prepareStatement(query);
@@ -226,7 +226,7 @@ public class PaymentPage extends javax.swing.JFrame {
         pstmt.setDate(3, sqlDate);
         pstmt.setString(4, cvv);
         pstmt.setString(5, hn);
-        pstmt.setDouble(6, totalPrice);
+        pstmt.setDouble(6, finalPrice); // Utilisez finalPrice ici
         pstmt.executeUpdate();
         JOptionPane.showMessageDialog(rootPane, "Your payment has been validated!");
     } catch (SQLException e) {

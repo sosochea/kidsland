@@ -235,8 +235,10 @@ public class LoginPage extends javax.swing.JFrame {
 
             if (rs.next()) {
                 JOptionPane.showMessageDialog(rootPane, "Your Login was successful");
+                Session.setUserEmail(un);
                 new WelcomePage(un).setVisible(true);
                 new LoginPage().disable();
+                new BookingPage().setVisible(true);
             } else {
                 JOptionPane.showMessageDialog(rootPane, "Your Login failed");
             }
