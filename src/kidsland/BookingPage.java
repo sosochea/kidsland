@@ -622,7 +622,7 @@ public class BookingPage extends javax.swing.JFrame {
 
     private void jPAYActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPAYActionPerformed
         // TODO add your handling code here:
-        new PaymentPage(idPanier, TotalPrice).setVisible(true); // Passez idPanier et TotalPrice ici
+        new RecapPage(idPanier, TotalPrice).setVisible(true); // Passez idPanier et TotalPrice ici
         this.setVisible(false);
     }//GEN-LAST:event_jPAYActionPerformed
 

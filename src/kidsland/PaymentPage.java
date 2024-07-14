@@ -205,7 +205,7 @@ public class PaymentPage extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-         // Récupérez les informations du formulaire
+            // Récupérez les informations du formulaire
     String hn = jHN.getText();
     String cn = jCN.getText();
     String cvv = jCVV.getText();
@@ -217,21 +217,18 @@ public class PaymentPage extends javax.swing.JFrame {
     java.sql.Date sqlDate = new java.sql.Date(selectedDate.getTime());
 
     // Insérez les informations dans la table paiement avec idPanier
-    String query = "INSERT INTO paiement (idPanier, numero_de_carte, date_expiration, cvv, nom_carte, prixFinal) VALUES (?, ?, ?, ?, ?, ?)";
-
+    String query = "INSERT INTO paiement (idPanier, numero_de_carte, date_expiration, cvv, nom_carte, total_price) VALUES (?, ?, ?, ?, ?, ?)";
     try {
         Connection conn = Mysqlc.mycon();
         PreparedStatement pstmt = conn.prepareStatement(query);
-        pstmt.setInt(1, idPanier); // Utilisez idPanier
+        pstmt.setInt(1, idPanier);
         pstmt.setString(2, cn);
         pstmt.setDate(3, sqlDate);
         pstmt.setString(4, cvv);
         pstmt.setString(5, hn);
-        pstmt.setDouble(6, totalPrice); // Utilisez totalPrice
+        pstmt.setDouble(6, totalPrice);
         pstmt.executeUpdate();
-
         JOptionPane.showMessageDialog(rootPane, "Your payment has been validated!");
-
     } catch (SQLException e) {
         e.printStackTrace();
         JOptionPane.showMessageDialog(rootPane, "Error during payment: " + e.getMessage());
@@ -239,7 +236,7 @@ public class PaymentPage extends javax.swing.JFrame {
         jHN.setText("");
         jCN.setText("");
         jCVV.setText("");
-        jED.setDate(null); // Reset the date chooser
+        jED.setDate(null);
     }
     }//GEN-LAST:event_jButton1ActionPerformed
 
