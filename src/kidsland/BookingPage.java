@@ -1353,7 +1353,8 @@ public class BookingPage extends javax.swing.JFrame {
                     if (imgBytes != null) {
                         ByteArrayInputStream bis = new ByteArrayInputStream(imgBytes);
                         Image image = ImageIO.read(bis);
-                        ImageIcon imageIcon = new ImageIcon(image);
+                        Image scaledImage = image.getScaledInstance(label.getWidth(), label.getHeight(), Image.SCALE_SMOOTH);
+                        ImageIcon imageIcon = new ImageIcon(scaledImage);
                         label.setIcon(imageIcon);
                     } else {
                         JOptionPane.showMessageDialog(rootPane, "No image found for this employee");
