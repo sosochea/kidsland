@@ -4,15 +4,15 @@
  */
 package kidsland;
 
-
-import java.util.Properties;
 import javax.mail.Message;
-import javax.mail.MessagingException;
-import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
 import javax.mail.Transport;
+import javax.mail.PasswordAuthentication;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import java.util.Properties;
+import javax.mail.Authenticator;
+import javax.mail.MessagingException;
 import javax.swing.JOptionPane;
 
 /**
@@ -54,11 +54,11 @@ public class SendMail extends javax.swing.JFrame {
 
         jLabel4.setText("Message");
 
-        jFrom.setText("jTextField1");
-
-        jSubject.setText("jTextField2");
-
-        jMail.setText("jTextField3");
+        jFrom.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jFromActionPerformed(evt);
+            }
+        });
 
         jSEND.setText("SEND");
         jSEND.addActionListener(new java.awt.event.ActionListener() {
@@ -127,75 +127,61 @@ public class SendMail extends javax.swing.JFrame {
 
     private void jSENDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jSENDActionPerformed
         // TODO add your handling code here:
-                // Récupérer les informations des champs de texte
         String from = jFrom.getText();
         String subject = jSubject.getText();
-        String message = jMail.getText();
-        
-        // Envoyer l'email
-        sendEmail(from, "kidlands70@gmail.com", subject, message);
+        String messageText = jMail.getText();
+        sendEmail(from, subject, messageText);
     }//GEN-LAST:event_jSENDActionPerformed
 
-    
-    private void sendEmail(String from, String to, String subject, String messageText) {
-        // Paramètres pour la connexion SMTP
+    private void jFromActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFromActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jFromActionPerformed
+
+    public void sendEmail(String from, String subject, String messageText) {
+        String to = "kidlands70@gmail.com";
         String host = "smtp.gmail.com";
-        String username = "votre_email@gmail.com"; // Remplacez par votre adresse Gmail
-        String password = "votre_mot_de_passe"; // Remplacez par votre mot de passe Gmail
+        String port = "587";
+        String userName = "kidlands70@gmail.com" ; // Utilisez toujours cette adresse e-mail pour l'authentification SMTP
+        String password = "rfxq dine wtbr gchx"; // Utilisez le mot de passe d'application
 
-        Properties props = new Properties();
-        props.put("mail.smtp.auth", "true");
-        props.put("mail.smtp.starttls.enable", "true");
-        props.put("mail.smtp.host", host);
-        props.put("mail.smtp.port", "587");
+        Properties properties = new Properties();
+        properties.put("mail.smtp.host", host);
+        properties.put("mail.smtp.port", port);
+        properties.put("mail.smtp.auth", "true");
+        properties.put("mail.smtp.starttls.enable", "true");
+        properties.put("mail.smtp.ssl.protocols", "TLSv1.2");
 
-        Session session = Session.getInstance(props, new javax.mail.Authenticator() {
+        Authenticator auth = new Authenticator() {
             protected PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication(username, password);
+                return new PasswordAuthentication(userName, password);
             }
-        });
+        };
+
+        Session session = Session.getInstance(properties, auth);
 
         try {
             Message message = new MimeMessage(session);
             message.setFrom(new InternetAddress(from));
             message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(to));
-            message.setSubject(subject);
+            message.setSubject("From : " + from + " Subject: " + subject);
             message.setText(messageText);
 
             Transport.send(message);
-
-            JOptionPane.showMessageDialog(this, "Email sent successfully!");
+            System.out.println("Email envoyé avec succès!");
+            JOptionPane.showMessageDialog(this, "Email envoyé avec succès!");
 
         } catch (MessagingException e) {
+            e.printStackTrace();
             throw new RuntimeException(e);
         }
     }
-    
-    
+
     
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
-        
-                try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(SendMail.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(SendMail.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(SendMail.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(SendMail.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-                
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
