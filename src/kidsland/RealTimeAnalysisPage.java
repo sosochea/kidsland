@@ -8,63 +8,91 @@ import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
 import org.jfree.data.category.DefaultCategoryDataset;
+import org.jfree.data.category.CategoryDataset;
 
 import javax.swing.*;
 import java.awt.*;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-
-
 /**
  *
  * @author Cheas
  */
-public class AnalysisPage extends javax.swing.JFrame {
+public class RealTimeAnalysisPage extends javax.swing.JFrame {
+    
+    private DefaultCategoryDataset dataset;
 
     /**
-     * Creates new form AnalysisPage
+     * Creates new form RealTimeAnalysisPage
      */
-   public AnalysisPage() {
-        setTitle("Attraction Sales Analysis");
+    public RealTimeAnalysisPage() {
+        initComponents();
+        
+        setTitle("Real-Time Attraction Sales Analysis");
         setSize(800, 600);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
 
-        DefaultCategoryDataset dataset = createDataset();
+        dataset = new DefaultCategoryDataset();
         JFreeChart barChart = ChartFactory.createBarChart(
                 "Attractions Sales", "Attraction", "Quantity Sold", dataset);
 
         ChartPanel chartPanel = new ChartPanel(barChart);
         chartPanel.setPreferredSize(new Dimension(800, 600));
         setContentPane(chartPanel);
+
+        // Démarrer le thread de mise à jour des données
+        Thread dataUpdateThread = new Thread(new DataUpdateTask());
+        dataUpdateThread.start();
     }
-   
-    private DefaultCategoryDataset createDataset() {
-        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
 
-        String query = "SELECT ride.nom, SUM(panieritem.quantité) as totalQuantity " +
-                       "FROM panieritem " +
-                       "JOIN ride ON panieritem.idRide = ride.id " +
-                       "GROUP BY ride.nom";
-
-        try (Connection conn = Mysqlc.mycon();
-             PreparedStatement pstmt = conn.prepareStatement(query);
-             ResultSet rs = pstmt.executeQuery()) {
-
-            while (rs.next()) {
-                String rideName = rs.getString("nom");
-                int quantity = rs.getInt("totalQuantity");
-                dataset.addValue(quantity, "Quantity", rideName);
+    private class DataUpdateTask implements Runnable {
+        @Override
+        public void run() {
+            while (true) {
+                updateDataset();
+                try {
+                    Thread.sleep(5000); // Mettre à jour toutes les 5 secondes
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
             }
-        } catch (Exception e) {
-            e.printStackTrace();
-            JOptionPane.showMessageDialog(this, "Error when loading data: " + e.getMessage());
         }
 
-        return dataset;
-    }
+        private void updateDataset() {
+            String query = "SELECT ride.nom, SUM(panieritem.quantité) as totalQuantity " +
+                    "FROM panieritem " +
+                    "JOIN ride ON panieritem.idRide = ride.id " +
+                    "GROUP BY ride.nom";
 
+            try (Connection conn = Mysqlc.mycon();
+                 PreparedStatement pstmt = conn.prepareStatement(query);
+                 ResultSet rs = pstmt.executeQuery()) {
+
+                DefaultCategoryDataset newDataset = new DefaultCategoryDataset();
+
+                while (rs.next()) {
+                    String rideName = rs.getString("nom");
+                    int quantity = rs.getInt("totalQuantity");
+                    newDataset.addValue(quantity, "Quantity", rideName);
+                }
+
+                SwingUtilities.invokeLater(() -> {
+                    dataset.clear();
+                    for (int i = 0; i < newDataset.getRowCount(); i++) {
+                        for (int j = 0; j < newDataset.getColumnCount(); j++) {
+                            dataset.addValue(newDataset.getValue(i, j), newDataset.getRowKey(i), newDataset.getColumnKey(j));
+                        }
+                    }
+                });
+
+            } catch (Exception e) {
+                e.printStackTrace();
+                JOptionPane.showMessageDialog(RealTimeAnalysisPage.this, "Error when loading data: " + e.getMessage());
+            }
+        }
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -108,29 +136,24 @@ public class AnalysisPage extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(AnalysisPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RealTimeAnalysisPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(AnalysisPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RealTimeAnalysisPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(AnalysisPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RealTimeAnalysisPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(AnalysisPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RealTimeAnalysisPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-        
-        SwingUtilities.invokeLater(() -> {
-            AnalysisPage example = new AnalysisPage();
-            example.setVisible(true);
-        });
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new AnalysisPage().setVisible(true);
-            }
+        SwingUtilities.invokeLater(() -> {
+            RealTimeAnalysisPage example = new RealTimeAnalysisPage();
+            example.setVisible(true);
         });
-    }
+        }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables
-}
+                }
