@@ -21,14 +21,17 @@ public class BookingPage extends javax.swing.JFrame {
     private JLabel jLabelImage;
     private int idPanier; 
     private double TotalPrice = 0.0;
+    private int idPeople; 
  
 
     /**
      * Creates new form BookingPage
      */
     public BookingPage() {
+        
         initComponents();
-        initializePanierPrincipal(); 
+        String userEmail = Session.getUserEmail();
+        initializePanierPrincipal(userEmail); 
        
         loadPrice(2, jP1 );
         loadPrice(3, jP2 );
@@ -51,42 +54,57 @@ public class BookingPage extends javax.swing.JFrame {
         loadImage("10", photo9);
     }
     
-    private void initializePanierPrincipal() {
-    Connection conn = null;
-    try {
-        conn = Mysqlc.mycon();
-        Random random = new Random();
-        boolean idExists;
-        do {
-            idPanier = random.nextInt(100000); // Générer un ID aléatoire
-            String checkQuery = "SELECT id FROM panierprincipal WHERE id = ?";
-            try (PreparedStatement checkStmt = conn.prepareStatement(checkQuery)) {
-                checkStmt.setInt(1, idPanier);
-                try (ResultSet rs = checkStmt.executeQuery()) {
-                    idExists = rs.next();
+    private void initializePanierPrincipal(String userEmail) {
+        Connection conn = null;
+        try {
+            conn = Mysqlc.mycon();
+
+            // Récupérer l'identifiant de l'utilisateur (idPeople) basé sur l'email (userEmail)
+            String getUserIdQuery = "SELECT id FROM people WHERE mail = ?";
+            try (PreparedStatement getUserIdStmt = conn.prepareStatement(getUserIdQuery)) {
+                getUserIdStmt.setString(1, userEmail);
+                try (ResultSet rs = getUserIdStmt.executeQuery()) {
+                    if (rs.next()) {
+                        idPeople = rs.getInt("id");
+                    } else {
+                        throw new Exception("User not found");
+                    }
                 }
             }
-        } while (idExists);
 
-        String insertPanierPrincipalQuery = "INSERT INTO panierprincipal (id, dateCreation) VALUES (?, ?)";
-        try (PreparedStatement pstmt = conn.prepareStatement(insertPanierPrincipalQuery)) {
-            pstmt.setInt(1, idPanier);
-            pstmt.setDate(2, new java.sql.Date(System.currentTimeMillis()));
-            pstmt.executeUpdate();
-        }
-    } catch (Exception e) {
-        e.printStackTrace();
-        JOptionPane.showMessageDialog(this, "Erreur lors de l'initialisation du panier principal : " + e.getMessage());
-    } finally {
-        try {
-            if (conn != null) {
-                conn.close();
+            Random random = new Random();
+            boolean idExists;
+            do {
+                idPanier = random.nextInt(100000); // Générer un ID aléatoire
+                String checkQuery = "SELECT id FROM panierprincipal WHERE id = ?";
+                try (PreparedStatement checkStmt = conn.prepareStatement(checkQuery)) {
+                    checkStmt.setInt(1, idPanier);
+                    try (ResultSet rs = checkStmt.executeQuery()) {
+                        idExists = rs.next();
+                    }
+                }
+            } while (idExists);
+
+            String insertPanierPrincipalQuery = "INSERT INTO panierprincipal (id, dateCreation, idPeople) VALUES (?, ?, ?)";
+            try (PreparedStatement pstmt = conn.prepareStatement(insertPanierPrincipalQuery)) {
+                pstmt.setInt(1, idPanier);
+                pstmt.setDate(2, new java.sql.Date(System.currentTimeMillis()));
+                pstmt.setInt(3, idPeople);  // Ajouter idPeople
+                pstmt.executeUpdate();
             }
         } catch (Exception e) {
             e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Erreur lors de l'initialisation du panier principal : " + e.getMessage());
+        } finally {
+            try {
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
-}
 
 
 
