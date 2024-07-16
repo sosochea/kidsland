@@ -40,9 +40,7 @@ public class Modifattraction extends javax.swing.JFrame {
         loadPrice(9, jP8 );
         loadPrice(10, jP9 );
         loadPrice(11, jP10 );
-        loadPrice(12, jP10 );
-        loadPrice(13, jP10 );
-        loadPrice(15, jP10 );
+
 
         
         loadName(2, jLabel3 );
@@ -55,9 +53,7 @@ public class Modifattraction extends javax.swing.JFrame {
         loadName(9, jLabel10 );
         loadName(10, jLabel11 );
         loadName(11, jLabel12 );
-        loadName(12, jLabel12 );
-        loadName(13, jLabel12 );
-        loadName(15, jLabel12 );
+
         
         
         loadID(2, jLabel13 );
@@ -70,9 +66,6 @@ public class Modifattraction extends javax.swing.JFrame {
         loadID(9, jLabel20 );
         loadID(10, jLabel21 );
         loadID(11, jLabel22 );
-        loadID(12, jLabel22 );
-        loadID(13, jLabel22 );
-        loadID(15, jLabel22 );
 
         
         loadImage("2", photo1);
@@ -85,9 +78,7 @@ public class Modifattraction extends javax.swing.JFrame {
         loadImage("9", photo8);
         loadImage("10", photo9);
         loadImage("11", photo10);
-        loadImage("12", photo10);
-        loadImage("13", photo10);
-        loadImage("15", photo10);
+
 
     }
     

@@ -174,7 +174,7 @@ public class WelcomePage extends javax.swing.JFrame {
         LoginPage loginPage = new LoginPage();
         // Afficher la page DiscoverPage
         loginPage.setVisible(true);
-        this.setVisible(true);         // TODO add your handling code here:
+        this.setVisible(false);         // TODO add your handling code here:
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed
 

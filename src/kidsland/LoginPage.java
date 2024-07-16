@@ -185,40 +185,44 @@ public class LoginPage extends javax.swing.JFrame {
 
     private void jLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jLoginActionPerformed
         String un = jMail.getText();
-    String ps = new String(jPass.getPassword());
+String ps = new String(jPass.getPassword());
 
-    try {
-        Connection con = Mysqlc.mycon(); 
-        String sql = "SELECT * FROM people WHERE mail = ? AND mot_de_passe = ?";
-        PreparedStatement pst = con.prepareStatement(sql);
+try {
+    Connection con = Mysqlc.mycon(); 
+    String sql = "SELECT * FROM people WHERE mail = ? AND mot_de_passe = ?";
+    PreparedStatement pst = con.prepareStatement(sql);
 
-        pst.setString(1, un);
-        pst.setString(2, ps);
+    pst.setString(1, un);
+    pst.setString(2, ps);
 
-        ResultSet rs = pst.executeQuery();
+    ResultSet rs = pst.executeQuery();
 
-        if (rs.next()) {
-            String userEmail = rs.getString("mail");
-            String userName = rs.getString("nom"); // Assuming 'nom' is the column name for the user's name
+    if (rs.next()) {
+        String userEmail = rs.getString("mail");
+        String userName = rs.getString("nom"); // Assuming 'nom' is the column name for the user's name
+        int userId = rs.getInt("id"); // Assuming 'id' is the column name for the user ID
 
-            // Set user's email and name in Session
-            Session.setUserEmail(userEmail);
-            Session.setUserName(userName);
+        // Set user's email and name in Session
+        Session.setUserEmail(userEmail);
+        Session.setUserName(userName);
 
-            // Determine role
-            String role = rs.getString("Role");
-            if ("member".equalsIgnoreCase(role)) { // Ignore case to match 'Member' or 'member'
-                new WelcomePage().setVisible(true);
-            } else {
-                new EmployeePage().setVisible(true);
-            }
-            this.setVisible(false); // Hide login page after successful login
+        // Determine role
+        String role = rs.getString("Role");
+        if ("customer".equalsIgnoreCase(role)) { // Ignore case to match 'customer' or 'Customer'
+            new BookingPage(userId).setVisible(true); // Pass the userId to the BookingPage constructor
+        } else if ("employee".equalsIgnoreCase(role)) { // Check for employee role
+            new EmployeePage().setVisible(true);
         } else {
-            JOptionPane.showMessageDialog(rootPane, "Your login failed");
+            JOptionPane.showMessageDialog(rootPane, "Role not recognized. Access denied.");
         }
-    } catch (Exception e) {
-        JOptionPane.showMessageDialog(rootPane, "Error: " + e.getMessage());
+        this.setVisible(false); // Hide login page after successful login
+    } else {
+        JOptionPane.showMessageDialog(rootPane, "Your login failed");
     }
+} catch (Exception e) {
+    JOptionPane.showMessageDialog(rootPane, "Error: " + e.getMessage());
+}
+
     }//GEN-LAST:event_jLoginActionPerformed
 
     private void jMailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMailActionPerformed

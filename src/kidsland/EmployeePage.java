@@ -32,7 +32,7 @@ public class EmployeePage extends javax.swing.JFrame {
     }
     
         private void loadUserPhoto(String userName) {
-        String query = "SELECT photo FROM people WHERE nom = ?";
+        String query = "SELECT photo FROM people WHERE nom = ? AND role='employee'";
         Connection conn = null;
         PreparedStatement pstmt = null;
         ResultSet rs = null;
