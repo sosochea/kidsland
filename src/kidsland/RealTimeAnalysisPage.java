@@ -31,7 +31,7 @@ public class RealTimeAnalysisPage extends javax.swing.JFrame {
         
         setTitle("Real-Time Attraction Sales Analysis");
         setSize(800, 600);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
 
         dataset = new DefaultCategoryDataset();
