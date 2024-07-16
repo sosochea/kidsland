@@ -170,7 +170,7 @@ public class LoginPage extends javax.swing.JFrame {
     private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked
         // TODO add your handling code here:
         this.setVisible(false);
-       //new RegisterPage().setVisible(true);
+       new RegisterPage().setVisible(true);
     }//GEN-LAST:event_jLabel5MouseClicked
 
     private void jShowPWActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jShowPWActionPerformed
@@ -209,7 +209,7 @@ try {
         // Determine role
         String role = rs.getString("Role");
         if ("customer".equalsIgnoreCase(role)) { // Ignore case to match 'customer' or 'Customer'
-            new BookingPage(userId).setVisible(true); // Pass the userId to the BookingPage constructor
+            new BookingPage().setVisible(true); // Pass the userId to the BookingPage constructor
         } else if ("employee".equalsIgnoreCase(role)) { // Check for employee role
             new EmployeePage().setVisible(true);
         } else {

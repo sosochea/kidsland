@@ -27,8 +27,8 @@ public class BookingPage extends javax.swing.JFrame {
     /**
      * Creates new form BookingPage
      */
-    public BookingPage(int idPeople) {
-    this.idPeople = idPeople;
+    public BookingPage() {
+    
     initComponents();
     String userEmail = Session.getUserEmail();
     initializePanierPrincipal(userEmail); 
@@ -55,22 +55,20 @@ public class BookingPage extends javax.swing.JFrame {
 }
 
     
-    private void initializePanierPrincipal(String userEmail) {
+   private void initializePanierPrincipal(String userEmail) {
     Connection conn = null;
     try {
         conn = Mysqlc.mycon();
 
-        if (idPeople == 0 && userEmail != null) {
-            // Récupérer l'identifiant de l'utilisateur (idPeople) basé sur l'email (userEmail)
-            String getUserIdQuery = "SELECT id FROM people WHERE mail = ?";
-            try (PreparedStatement getUserIdStmt = conn.prepareStatement(getUserIdQuery)) {
-                getUserIdStmt.setString(1, userEmail);
-                try (ResultSet rs = getUserIdStmt.executeQuery()) {
-                    if (rs.next()) {
-                        idPeople = rs.getInt("id");
-                    } else {
-                        throw new Exception("User not found");
-                    }
+        // Récupérer l'identifiant de l'utilisateur (idPeople) basé sur l'email (userEmail)
+        String getUserIdQuery = "SELECT id FROM people WHERE mail = ?";
+        try (PreparedStatement getUserIdStmt = conn.prepareStatement(getUserIdQuery)) {
+            getUserIdStmt.setString(1, userEmail);
+            try (ResultSet rs = getUserIdStmt.executeQuery()) {
+                if (rs.next()) {
+                    idPeople = rs.getInt("id");
+                } else {
+                    throw new Exception("User not found");
                 }
             }
         }
@@ -108,6 +106,7 @@ public class BookingPage extends javax.swing.JFrame {
         }
     }
 }
+
 
 
 
