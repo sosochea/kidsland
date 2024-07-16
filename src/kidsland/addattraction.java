@@ -19,8 +19,6 @@ public class addattraction extends javax.swing.JFrame {
     private String selectedImagePath;
 
     public addattraction() {
-        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); 
-
         initComponents();
         jButton1.addActionListener(new ActionListener() {
             @Override
@@ -34,6 +32,8 @@ public class addattraction extends javax.swing.JFrame {
                 addAttraction();
             }
         });
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); 
+
     }
 
     /**

@@ -530,17 +530,14 @@ Addattraction.setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-    // Demander à l'utilisateur d'entrer l'ID de l'attraction à supprimer
-    String attractionIdInput = JOptionPane.showInputDialog(this, "Entrez l'ID de l'attraction à supprimer:");
+     String attractionIdInput = JOptionPane.showInputDialog(this, "Entrez l'ID de l'attraction à supprimer:");
 
     if (attractionIdInput != null && !attractionIdInput.isEmpty()) {
         try {
-            // Convertir l'ID en entier
-            int attractionId = Integer.parseInt(attractionIdInput);
+             int attractionId = Integer.parseInt(attractionIdInput);
             
 
-            // Appeler la méthode pour supprimer l'attraction
-            supprimerAttraction(attractionId);
+             supprimerAttraction(attractionId);
 
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(this, "ID invalide. Veuillez entrer un nombre entier.", "Erreur", JOptionPane.ERROR_MESSAGE);
@@ -612,31 +609,24 @@ private void loadImage(String attractionId, JLabel label) {
                 String statut = rs.getString("statut");
                 byte[] imgBytes = rs.getBytes("photo");
                 
-                // Vérifiez si l'attraction est disponible
-                if (statut.equals("disponible") && imgBytes != null) {
-                    // Charger l'image depuis la base de données
-                    ByteArrayInputStream bis = new ByteArrayInputStream(imgBytes);
+                 if (statut.equals("disponible") && imgBytes != null) {
+                     ByteArrayInputStream bis = new ByteArrayInputStream(imgBytes);
                     Image image = ImageIO.read(bis);
                     
-                    // Redimensionner l'image à la taille du JLabel
-                    int labelWidth = label.getWidth();
+                     int labelWidth = label.getWidth();
                     int labelHeight = label.getHeight();
                     Image scaledImage = image.getScaledInstance(labelWidth, labelHeight, Image.SCALE_SMOOTH);
                     
                     ImageIcon imageIcon = new ImageIcon(scaledImage);
                     
-                    // Réinitialiser le texte du JLabel
-                    label.setText(null); // Assurez-vous qu'il n'y a pas de texte supplémentaire
+                     label.setText(null);  
                     
-                    // Définir l'ImageIcon sur le JLabel
-                    label.setIcon(imageIcon);
+                     label.setIcon(imageIcon);
                 } else {
-                    // Charger une image par défaut si l'attraction est indisponible ou si aucune image n'est disponible
-                    loadDefaultImage(label); // Méthode pour charger une image par défaut
+                     loadDefaultImage(label);  
                 }
             } else {
-                // Charger une image par défaut si aucune attraction n'est trouvée dans la base de données
-                loadDefaultImage(label); // Méthode pour charger une image par défaut
+                 loadDefaultImage(label);  
             }
         } else {
             JOptionPane.showMessageDialog(rootPane, "Database connection failed.");
@@ -754,8 +744,7 @@ private void afficherDetailsAttraction(int attractionId) {
                 return;
             }
 
-            // Call the method to update the attraction
-            modifierAttraction(attractionId, newNom, newPrix, newStatut); // Pass description as empty if not needed
+             modifierAttraction(attractionId, newNom, newPrix, newStatut); // Pass description as empty if not needed
 
         } else {
             JOptionPane.showMessageDialog(this, "Aucune attraction trouvée avec cet ID.", "Erreur", JOptionPane.ERROR_MESSAGE);
@@ -767,24 +756,21 @@ private void afficherDetailsAttraction(int attractionId) {
     }
 }
 private void loadDefaultImage(JLabel label) {
-    // Chemin vers l'image par défaut
-    String defaultImagePath = "C:\\Users\\lephi\\OneDrive\\Documents\\indispo.png";
+     String defaultImagePath = "C:\\Users\\lephi\\OneDrive\\Documents\\indispo.png";
     try {
         File imgFile = new File(defaultImagePath);
         if (imgFile.exists()) {
             Image image = ImageIO.read(imgFile);
 
-            // Redimensionner l'image à la taille du JLabel
-            int labelWidth = label.getWidth();
+             int labelWidth = label.getWidth();
             int labelHeight = label.getHeight();
             Image scaledImage = image.getScaledInstance(labelWidth, labelHeight, Image.SCALE_SMOOTH);
 
             ImageIcon imageIcon = new ImageIcon(scaledImage);
             
-            // Réinitialisez le texte du JLabel
-            label.setText(null); // Assurez-vous qu'il n'y a pas de texte résiduel
+             label.setText(null);  
             
-            label.setIcon(imageIcon); // Définir l'ImageIcon sur le JLabel
+            label.setIcon(imageIcon);  
         } else {
             JOptionPane.showMessageDialog(rootPane, "Default image file not found.");
         }
@@ -823,13 +809,6 @@ private void loadDefaultImage(JLabel label) {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(Modifattraction.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */

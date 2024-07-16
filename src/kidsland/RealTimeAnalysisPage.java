@@ -36,7 +36,7 @@ public class RealTimeAnalysisPage extends javax.swing.JFrame {
 
         dataset = new DefaultCategoryDataset();
         JFreeChart barChart = ChartFactory.createBarChart(
-                "Attractions Sales", "Attraction", "Quantity Sold", dataset);
+                "Attractions Sales in real time", "Attraction", "Quantity Sold", dataset);
 
         ChartPanel chartPanel = new ChartPanel(barChart);
         chartPanel.setPreferredSize(new Dimension(800, 600));

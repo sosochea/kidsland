@@ -14,10 +14,8 @@ import org.jfree.chart.JFreeChart;
 import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.plot.PlotOrientation;
-import com.toedter.calendar.JDateChooser;
 import java.awt.BorderLayout;
 import java.sql.*;
-import java.util.Date;
 import org.jfree.data.general.DefaultPieDataset;
 
 
@@ -34,7 +32,6 @@ public class Reservations extends javax.swing.JFrame {
      * Creates new form Reservations
      */
     public Reservations() {
-        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); 
         initComponents();
         loadName(2, jLabel11);
         loadName(3, jLabel12);
@@ -61,7 +58,8 @@ public class Reservations extends javax.swing.JFrame {
         //ChartPanel chartPanel = new ChartPanel(chart);
         //chartPanel.setPreferredSize(new java.awt.Dimension(500, 300));
         //getContentPane().add(chartPanel, java.awt.BorderLayout.CENTER);        
-        
+             setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); 
+   
     }
 
     /**
@@ -291,7 +289,7 @@ public class Reservations extends javax.swing.JFrame {
     chartPanel.setPreferredSize(new java.awt.Dimension(800, 600));
 
     JFrame frame = new JFrame("Histogramme des réservations par attraction");
-    frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); // Ferme la fenêtre d'histogramme
+    frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);  
     frame.getContentPane().add(chartPanel, BorderLayout.CENTER);
     frame.pack();
     frame.setLocationRelativeTo(null);
@@ -305,7 +303,7 @@ realTimeAnalysisPage.setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        createAndDisplayPieChart(); // Appel de la méthode pour créer et afficher le diagramme circulaire
+        createAndDisplayPieChart();  
     }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
@@ -340,7 +338,6 @@ private void loadName(int rideId, JLabel label) {
             Connection conn = Mysqlc.mycon();
             PreparedStatement pstmt = conn.prepareStatement(query);
             pstmt.setInt(1, rideId);
-            //pstmt.setDate(2, new java.sql.Date(selectedDate.getTime())); // Convert Date to java.sql.Date
             ResultSet rs = pstmt.executeQuery();
 
             if (rs.next()) {
@@ -371,22 +368,20 @@ private int getTotalReservations(int rideId) {
                 int totalReservations = rs.getInt("total_reservations");
                 return totalReservations;
             } else {
-                return 0; // Retourner 0 si aucune réservation trouvée
+                return 0; 
             }
         } catch (SQLException e) {
             e.printStackTrace();
             JOptionPane.showMessageDialog(this, "Error fetching total reservations: " + e.getMessage());
-            return 0; // Retourner 0 en cas d'erreur
+            return 0; 
         }
     }
 
 
 
 private JFreeChart createHistogramChart() {
-    // Création du dataset pour l'histogramme
     DefaultCategoryDataset dataset = new DefaultCategoryDataset();
 
-    // Récupération de tous les noms d'attractions et de leurs réservations totales
     String query = "SELECT id, nom FROM ride";
     try (Connection conn = Mysqlc.mycon();
          PreparedStatement pstmt = conn.prepareStatement(query);
@@ -405,23 +400,21 @@ private JFreeChart createHistogramChart() {
         JOptionPane.showMessageDialog(this, "Erreur lors de la récupération des données pour l'histogramme : " + e.getMessage());
     }
 
-    // Création du chart avec orientation verticale
     JFreeChart chart = ChartFactory.createBarChart(
-            "Total Reservations par attraction", // Titre du chart
-            "Attraction",                        // Label de l'axe des X
-            "Total Reservations",                // Label de l'axe des Y
-            dataset,                             // Dataset
-            PlotOrientation.VERTICAL,            // Orientation du plot
-            true,                                // Inclure la légende
-            true,                                // Afficher les tooltips
-            false                                // URLs (non utilisé ici)
+            "Total bookings",  
+            "Ride",                         
+            "Reservations",                
+            dataset,                              
+            PlotOrientation.VERTICAL,             
+            true,                                 
+            true,                                 
+            false                                 
     );
 
-    // Personnalisation de l'axe des X pour afficher les noms complets des attractions
-    CategoryPlot plot = (CategoryPlot) chart.getPlot();
+     CategoryPlot plot = (CategoryPlot) chart.getPlot();
     CategoryAxis xAxis = plot.getDomainAxis();
-    xAxis.setCategoryLabelPositions(CategoryLabelPositions.UP_45); // Inclinaison à 45 degrés pour la lisibilité
-    xAxis.setMaximumCategoryLabelWidthRatio(0.8f); // Ajustement de la largeur des étiquettes
+    xAxis.setCategoryLabelPositions(CategoryLabelPositions.UP_45); 
+    xAxis.setMaximumCategoryLabelWidthRatio(0.8f); 
 
     return chart;
 }
@@ -447,21 +440,19 @@ private void createAndDisplayPieChart() {
         JOptionPane.showMessageDialog(this, "Error fetching data for pie chart: " + e.getMessage());
     }
 
-    // Création du chart circulaire
     JFreeChart chart = ChartFactory.createPieChart(
-            "Répartition des réservations par attraction", // Titre du chart
-            dataset,                                       // Dataset
-            true,                                          // Inclure la légende
-            true,                                          // Afficher les tooltips
-            false                                          // URLs (non utilisé ici)
+            "Distribution of bookings by attraction", 
+            dataset,                                       
+            true,                                          
+            true,                                          
+            false                                          
     );
 
-    // Affichage du chart dans une nouvelle fenêtre
     ChartPanel chartPanel = new ChartPanel(chart);
-    chartPanel.setPreferredSize(new Dimension(800, 600)); // Taille du panel de chart
+    chartPanel.setPreferredSize(new Dimension(800, 600)); 
 
-    JFrame frame = new JFrame("Diagramme Circulaire des Réservations");
-    frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); // Ferme la fenêtre d'histogramme
+    JFrame frame = new JFrame("Distribution of bookings by attraction");
+    frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); 
     frame.getContentPane().add(chartPanel, BorderLayout.CENTER);
     frame.pack();
     frame.setLocationRelativeTo(null);
@@ -495,8 +486,6 @@ private void createAndDisplayPieChart() {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(Reservations.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
-        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {

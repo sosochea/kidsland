@@ -203,7 +203,6 @@ reservations.setVisible(true);
         window.dispose();
     }
     
-    // Affiche la page d'accueil
     WelcomePage Accueil = new WelcomePage();
     Accueil.setVisible(true);
     }//GEN-LAST:event_jButton4ActionPerformed
