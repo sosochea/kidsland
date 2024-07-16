@@ -95,7 +95,7 @@ public class BookingPage extends javax.swing.JFrame {
         }
     } catch (Exception e) {
         e.printStackTrace();
-        JOptionPane.showMessageDialog(this, "Erreur lors de l'initialisation du panier principal : " + e.getMessage());
+        JOptionPane.showMessageDialog(this, "Error initializing main cart : " + e.getMessage());
     } finally {
         try {
             if (conn != null) {
@@ -628,9 +628,9 @@ public class BookingPage extends javax.swing.JFrame {
         conn.commit();
         conn.setAutoCommit(true);
 
-        JOptionPane.showMessageDialog(rootPane, "Le panier a été mis à jour avec succès !");
+        JOptionPane.showMessageDialog(rootPane, "Cart has been successfully updated!");
     } catch (NumberFormatException e) {
-        System.out.println("La valeur du JSpinner n'est pas un entier valide.");
+        System.out.println("JSpinner value is not a valid integer.");
     } catch (Exception e) {
         e.printStackTrace();
         try {
@@ -640,7 +640,7 @@ public class BookingPage extends javax.swing.JFrame {
         } catch (Exception rollbackEx) {
             rollbackEx.printStackTrace();
         }
-        JOptionPane.showMessageDialog(rootPane, "Erreur lors de la mise à jour du panier : " + e.getMessage());
+        JOptionPane.showMessageDialog(rootPane, "Error updating cart: " + e.getMessage());
     } finally {
         try {
             if (conn != null) {
@@ -700,9 +700,9 @@ public class BookingPage extends javax.swing.JFrame {
         conn.commit();
         conn.setAutoCommit(true);
 
-        JOptionPane.showMessageDialog(rootPane, "Le panier a été mis à jour avec succès !");
+        JOptionPane.showMessageDialog(rootPane, "Cart has been successfully updated!");
     } catch (NumberFormatException e) {
-        System.out.println("La valeur du JSpinner n'est pas un entier valide.");
+        System.out.println("JSpinner value is not a valid integer.");
     } catch (Exception e) {
         e.printStackTrace();
         try {
@@ -712,7 +712,7 @@ public class BookingPage extends javax.swing.JFrame {
         } catch (Exception rollbackEx) {
             rollbackEx.printStackTrace();
         }
-        JOptionPane.showMessageDialog(rootPane, "Erreur lors de la mise à jour du panier : " + e.getMessage());
+        JOptionPane.showMessageDialog(rootPane, "Error updating cart: " + e.getMessage());
     } finally {
         try {
             if (conn != null) {
@@ -772,9 +772,9 @@ public class BookingPage extends javax.swing.JFrame {
         conn.commit();
         conn.setAutoCommit(true);
 
-        JOptionPane.showMessageDialog(rootPane, "Le panier a été mis à jour avec succès !");
+        JOptionPane.showMessageDialog(rootPane, "Cart has been successfully updated !");
     } catch (NumberFormatException e) {
-        System.out.println("La valeur du JSpinner n'est pas un entier valide.");
+        System.out.println("JSpinner value is not a valid integer.");
     } catch (Exception e) {
         e.printStackTrace();
         try {
@@ -784,7 +784,7 @@ public class BookingPage extends javax.swing.JFrame {
         } catch (Exception rollbackEx) {
             rollbackEx.printStackTrace();
         }
-        JOptionPane.showMessageDialog(rootPane, "Erreur lors de la mise à jour du panier : " + e.getMessage());
+        JOptionPane.showMessageDialog(rootPane, "Error updating cart : " + e.getMessage());
     } finally {
         try {
             if (conn != null) {
@@ -843,9 +843,9 @@ public class BookingPage extends javax.swing.JFrame {
         conn.commit();
         conn.setAutoCommit(true);
 
-        JOptionPane.showMessageDialog(rootPane, "Le panier a été mis à jour avec succès !");
+        JOptionPane.showMessageDialog(rootPane, "Cart has been successfully updated !");
     } catch (NumberFormatException e) {
-        System.out.println("La valeur du JSpinner n'est pas un entier valide.");
+        System.out.println("The JSpinner value is not a valid integer.");
     } catch (Exception e) {
         e.printStackTrace();
         try {
@@ -855,7 +855,7 @@ public class BookingPage extends javax.swing.JFrame {
         } catch (Exception rollbackEx) {
             rollbackEx.printStackTrace();
         }
-        JOptionPane.showMessageDialog(rootPane, "Erreur lors de la mise à jour du panier : " + e.getMessage());
+        JOptionPane.showMessageDialog(rootPane, "Error updating cart: " + e.getMessage());
     } finally {
         try {
             if (conn != null) {
@@ -914,9 +914,9 @@ public class BookingPage extends javax.swing.JFrame {
         conn.commit();
         conn.setAutoCommit(true);
 
-        JOptionPane.showMessageDialog(rootPane, "Le panier a été mis à jour avec succès !");
+        JOptionPane.showMessageDialog(rootPane, "Cart has been successfully updated!");
     } catch (NumberFormatException e) {
-        System.out.println("La valeur du JSpinner n'est pas un entier valide.");
+        System.out.println("JSpinner value is not a valid integer.");
     } catch (Exception e) {
         e.printStackTrace();
         try {
@@ -926,7 +926,7 @@ public class BookingPage extends javax.swing.JFrame {
         } catch (Exception rollbackEx) {
             rollbackEx.printStackTrace();
         }
-        JOptionPane.showMessageDialog(rootPane, "Erreur lors de la mise à jour du panier : " + e.getMessage());
+        JOptionPane.showMessageDialog(rootPane, "Error updating cart : " + e.getMessage());
     } finally {
         try {
             if (conn != null) {
@@ -985,9 +985,9 @@ public class BookingPage extends javax.swing.JFrame {
         conn.commit();
         conn.setAutoCommit(true);
 
-        JOptionPane.showMessageDialog(rootPane, "Le panier a été mis à jour avec succès !");
+        JOptionPane.showMessageDialog(rootPane, "Cart has been successfully updated !");
     } catch (NumberFormatException e) {
-        System.out.println("La valeur du JSpinner n'est pas un entier valide.");
+        System.out.println("JSpinner value is not a valid integer.");
     } catch (Exception e) {
         e.printStackTrace();
         try {
@@ -997,7 +997,7 @@ public class BookingPage extends javax.swing.JFrame {
         } catch (Exception rollbackEx) {
             rollbackEx.printStackTrace();
         }
-        JOptionPane.showMessageDialog(rootPane, "Erreur lors de la mise à jour du panier : " + e.getMessage());
+        JOptionPane.showMessageDialog(rootPane, "Error updating cart : " + e.getMessage());
     } finally {
         try {
             if (conn != null) {
@@ -1056,9 +1056,9 @@ public class BookingPage extends javax.swing.JFrame {
         conn.commit();
         conn.setAutoCommit(true);
 
-        JOptionPane.showMessageDialog(rootPane, "Le panier a été mis à jour avec succès !");
+        JOptionPane.showMessageDialog(rootPane, "Cart has been successfully updated !");
     } catch (NumberFormatException e) {
-        System.out.println("La valeur du JSpinner n'est pas un entier valide.");
+        System.out.println("JSpinner value is not a valid integer.");
     } catch (Exception e) {
         e.printStackTrace();
         try {
@@ -1068,7 +1068,7 @@ public class BookingPage extends javax.swing.JFrame {
         } catch (Exception rollbackEx) {
             rollbackEx.printStackTrace();
         }
-        JOptionPane.showMessageDialog(rootPane, "Erreur lors de la mise à jour du panier : " + e.getMessage());
+        JOptionPane.showMessageDialog(rootPane, "Error updating cart: " + e.getMessage());
     } finally {
         try {
             if (conn != null) {
@@ -1127,9 +1127,9 @@ public class BookingPage extends javax.swing.JFrame {
         conn.commit();
         conn.setAutoCommit(true);
 
-        JOptionPane.showMessageDialog(rootPane, "Le panier a été mis à jour avec succès !");
+        JOptionPane.showMessageDialog(rootPane, "Cart has been successfully updated!");
     } catch (NumberFormatException e) {
-        System.out.println("La valeur du JSpinner n'est pas un entier valide.");
+        System.out.println("JSpinner value is not a valid integer.");
     } catch (Exception e) {
         e.printStackTrace();
         try {
@@ -1139,7 +1139,7 @@ public class BookingPage extends javax.swing.JFrame {
         } catch (Exception rollbackEx) {
             rollbackEx.printStackTrace();
         }
-        JOptionPane.showMessageDialog(rootPane, "Erreur lors de la mise à jour du panier : " + e.getMessage());
+        JOptionPane.showMessageDialog(rootPane, "Error updating cart : " + e.getMessage());
     } finally {
         try {
             if (conn != null) {
@@ -1198,9 +1198,9 @@ public class BookingPage extends javax.swing.JFrame {
         conn.commit();
         conn.setAutoCommit(true);
 
-        JOptionPane.showMessageDialog(rootPane, "Le panier a été mis à jour avec succès !");
+        JOptionPane.showMessageDialog(rootPane, "Cart has been successfully updated !");
     } catch (NumberFormatException e) {
-        System.out.println("La valeur du JSpinner n'est pas un entier valide.");
+        System.out.println("JSpinner value is not a valid integer.");
     } catch (Exception e) {
         e.printStackTrace();
         try {
@@ -1210,7 +1210,7 @@ public class BookingPage extends javax.swing.JFrame {
         } catch (Exception rollbackEx) {
             rollbackEx.printStackTrace();
         }
-        JOptionPane.showMessageDialog(rootPane, "Erreur lors de la mise à jour du panier : " + e.getMessage());
+        JOptionPane.showMessageDialog(rootPane, "Error updating cart : " + e.getMessage());
     } finally {
         try {
             if (conn != null) {
@@ -1269,9 +1269,9 @@ public class BookingPage extends javax.swing.JFrame {
         conn.commit();
         conn.setAutoCommit(true);
 
-        JOptionPane.showMessageDialog(rootPane, "Le panier a été mis à jour avec succès !");
+        JOptionPane.showMessageDialog(rootPane, "Cart has been successfully updated !");
     } catch (NumberFormatException e) {
-        System.out.println("La valeur du JSpinner n'est pas un entier valide.");
+        System.out.println("JSpinner value is not a valid integer.");
     } catch (Exception e) {
         e.printStackTrace();
         try {
@@ -1281,7 +1281,7 @@ public class BookingPage extends javax.swing.JFrame {
         } catch (Exception rollbackEx) {
             rollbackEx.printStackTrace();
         }
-        JOptionPane.showMessageDialog(rootPane, "Erreur lors de la mise à jour du panier : " + e.getMessage());
+        JOptionPane.showMessageDialog(rootPane, "Error updating cart : " + e.getMessage());
     } finally {
         try {
             if (conn != null) {
@@ -1344,14 +1344,14 @@ public class BookingPage extends javax.swing.JFrame {
 
             if (rs.next()) {
                 double price = rs.getDouble("prix");
-                label.setText("Prix: " + price + "€");
+                label.setText("Price: " + price + "£");
             } else {
-                label.setText("Attraction non trouvée.");
+                label.setText("Attraction not found.");
             }
 
         } catch (Exception e) {
             e.printStackTrace();
-            JOptionPane.showMessageDialog(this, "Erreur lors de la récupération du prix: " + e.getMessage());
+            JOptionPane.showMessageDialog(this, "Error retrieving price: " + e.getMessage());
         }
     }
 

@@ -288,7 +288,7 @@ public class Reservations extends javax.swing.JFrame {
     ChartPanel chartPanel = new ChartPanel(chart);
     chartPanel.setPreferredSize(new java.awt.Dimension(800, 600));
 
-    JFrame frame = new JFrame("Histogramme des réservations par attraction");
+    JFrame frame = new JFrame("Histogram of reservations by attraction");
     frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);  
     frame.getContentPane().add(chartPanel, BorderLayout.CENTER);
     frame.pack();
@@ -328,7 +328,7 @@ private void loadName(int rideId, JLabel label) {
 
     } catch (Exception e) {
         e.printStackTrace();
-        JOptionPane.showMessageDialog(this, "Erreur lors de la récupération du nom de l'attraction: " + e.getMessage());
+        JOptionPane.showMessageDialog(this, "Error retrieving attraction name:" + e.getMessage());
     }
 }
 
@@ -397,7 +397,7 @@ private JFreeChart createHistogramChart() {
 
     } catch (SQLException e) {
         e.printStackTrace();
-        JOptionPane.showMessageDialog(this, "Erreur lors de la récupération des données pour l'histogramme : " + e.getMessage());
+        JOptionPane.showMessageDialog(this, "Error retrieving data for histogram: " + e.getMessage());
     }
 
     JFreeChart chart = ChartFactory.createBarChart(

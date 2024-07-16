@@ -169,8 +169,8 @@ public class SendMail extends javax.swing.JFrame {
             message.setText(messageText);
 
             Transport.send(message);
-            System.out.println("Email envoyé avec succès!");
-            JOptionPane.showMessageDialog(this, "Email envoyé avec succès!");
+            System.out.println("Email sent successfully!");
+            JOptionPane.showMessageDialog(this, "Email sent successfully!");
 
         } catch (MessagingException e) {
             e.printStackTrace();

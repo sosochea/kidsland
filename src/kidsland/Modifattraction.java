@@ -509,17 +509,17 @@ public class Modifattraction extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-String input = JOptionPane.showInputDialog(null, "Sélectionnez un ID entre 1 et 10 :");
+String input = JOptionPane.showInputDialog(null, "Select an ID between 1 and 10:");
 
     try {
         int id = Integer.parseInt(input);
         if (id >= 1 && id <= 10) {
             afficherDetailsAttraction(id);
         } else {
-            JOptionPane.showMessageDialog(null, "Veuillez entrer un ID valide entre 1 et 10.", "Erreur", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Please enter a valid ID between 1 and 10.", "Error", JOptionPane.ERROR_MESSAGE);
         }
     } catch (NumberFormatException e) {
-        JOptionPane.showMessageDialog(null, "Entrée invalide. Veuillez entrer un nombre.", "Erreur", JOptionPane.ERROR_MESSAGE);
+        JOptionPane.showMessageDialog(null, "Invalid entry. Please enter a number.", "Error", JOptionPane.ERROR_MESSAGE);
     }
     }//GEN-LAST:event_jButton3ActionPerformed
 
@@ -530,7 +530,7 @@ Addattraction.setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-     String attractionIdInput = JOptionPane.showInputDialog(this, "Entrez l'ID de l'attraction à supprimer:");
+     String attractionIdInput = JOptionPane.showInputDialog(this, "Enter the attraction ID to delete:");
 
     if (attractionIdInput != null && !attractionIdInput.isEmpty()) {
         try {
@@ -540,10 +540,10 @@ Addattraction.setVisible(true);
              supprimerAttraction(attractionId);
 
         } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(this, "ID invalide. Veuillez entrer un nombre entier.", "Erreur", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Invalid ID. Please enter a whole number.", "Error", JOptionPane.ERROR_MESSAGE);
         }
     } else {
-        JOptionPane.showMessageDialog(this, "ID non spécifié. L'opération a été annulée.", "Annulé", JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(this, "ID not specified. The operation was canceled.", "Cancel", JOptionPane.INFORMATION_MESSAGE);
     }
     }//GEN-LAST:event_jButton4ActionPerformed
 private void supprimerAttraction(int attractionId) {
@@ -557,14 +557,14 @@ private void supprimerAttraction(int attractionId) {
         int rowsAffected = pstmt.executeUpdate();
 
         if (rowsAffected > 0) {
-            JOptionPane.showMessageDialog(this, "Attraction avec ID " + attractionId + " supprimée avec succès.", "Succès", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Attraction with ID" + attractionId + " successfully deleted.", "Success", JOptionPane.INFORMATION_MESSAGE);
         } else {
-            JOptionPane.showMessageDialog(this, "Aucune attraction trouvée avec cet ID.", "Erreur", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "No attractions found with this ID.", "Error", JOptionPane.ERROR_MESSAGE);
         }
 
     } catch (SQLException e) {
         e.printStackTrace();
-        JOptionPane.showMessageDialog(this, "Erreur lors de la suppression de l'attraction.", "Erreur", JOptionPane.ERROR_MESSAGE);
+        JOptionPane.showMessageDialog(this, "Error deleting attraction.", "Error", JOptionPane.ERROR_MESSAGE);
     }
 }
     
@@ -582,14 +582,14 @@ private void supprimerAttraction(int attractionId) {
         int rowsAffected = pstmt.executeUpdate();
 
         if (rowsAffected > 0) {
-            JOptionPane.showMessageDialog(null, "Attraction modifiée avec succès.", "Succès", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Successfully modified attraction.", "Success", JOptionPane.INFORMATION_MESSAGE);
         } else {
-            JOptionPane.showMessageDialog(null, "Aucune attraction trouvée avec cet ID.", "Erreur", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "No attractions found with this ID.", "Error", JOptionPane.ERROR_MESSAGE);
         }
 
     } catch (SQLException e) {
         e.printStackTrace();
-        JOptionPane.showMessageDialog(null, "Erreur lors de la modification des détails.", "Erreur", JOptionPane.ERROR_MESSAGE);
+        JOptionPane.showMessageDialog(null, "Error editing details.", "Error", JOptionPane.ERROR_MESSAGE);
     }
 }
 private void loadImage(String attractionId, JLabel label) {
@@ -661,7 +661,7 @@ private void loadID(int rideId, JLabel label) {
 
     } catch (Exception e) {
         e.printStackTrace();
-        JOptionPane.showMessageDialog(this, "Erreur lors de la récupération de l'ID: " + e.getMessage());
+        JOptionPane.showMessageDialog(this, "Error retrieving ID: " + e.getMessage());
     }
 }
 
@@ -678,14 +678,14 @@ private void loadPrice(int rideId, JLabel label ) {
 
             if (rs.next()) {
                 double price = rs.getDouble("prix");
-                label.setText("Prix: " + price + "€");
+                label.setText("Price: " + price + "£");
             } else {
                 label.setText("Empty.");
             }
 
         } catch (Exception e) {
             e.printStackTrace();
-            JOptionPane.showMessageDialog(this, "Erreur lors de la récupération du prix: " + e.getMessage());
+            JOptionPane.showMessageDialog(this, "Error retrieving price: " + e.getMessage());
         }
     }
     
@@ -706,7 +706,7 @@ private void loadName(int rideId, JLabel label) {
 
     } catch (SQLException e) {
         e.printStackTrace();
-        JOptionPane.showMessageDialog(this, "Erreur lors de la récupération du nom de l'attraction: " + e.getMessage());
+        JOptionPane.showMessageDialog(this, "Error retrieving attraction name: " + e.getMessage());
     }
 }
 
@@ -728,31 +728,31 @@ private void afficherDetailsAttraction(int attractionId) {
                              "\nPrix: " + prix + 
                              "\nStatut: " + statut;
 
-            JOptionPane.showMessageDialog(this, details, "Détails de l'Attraction", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(this, details, "Attraction Details", JOptionPane.INFORMATION_MESSAGE);
 
             // Prompt user for new values
-            String newNom = JOptionPane.showInputDialog(this, "Modifier le nom:", nom);
-            String newPrixInput = JOptionPane.showInputDialog(this, "Modifier le prix:", prix);
-            String newStatut = JOptionPane.showInputDialog(this, "Modifier le statut:", statut);
+            String newNom = JOptionPane.showInputDialog(this, "Edit name:", nom);
+            String newPrixInput = JOptionPane.showInputDialog(this, "Change price:", prix);
+            String newStatut = JOptionPane.showInputDialog(this, "Change status:", statut);
 
             // Validate and parse the new price
             double newPrix;
             try {
                 newPrix = Double.parseDouble(newPrixInput);
             } catch (NumberFormatException e) {
-                JOptionPane.showMessageDialog(this, "Prix invalide. Aucune modification effectuée.", "Erreur", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Invalid price. No changes made.", "Error", JOptionPane.ERROR_MESSAGE);
                 return;
             }
 
              modifierAttraction(attractionId, newNom, newPrix, newStatut); // Pass description as empty if not needed
 
         } else {
-            JOptionPane.showMessageDialog(this, "Aucune attraction trouvée avec cet ID.", "Erreur", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "No attractions found with this ID.", "Error", JOptionPane.ERROR_MESSAGE);
         }
 
     } catch (SQLException e) {
         e.printStackTrace();
-        JOptionPane.showMessageDialog(this, "Erreur lors de la récupération des détails.", "Erreur", JOptionPane.ERROR_MESSAGE);
+        JOptionPane.showMessageDialog(this, "Error retrieving details.", "Error", JOptionPane.ERROR_MESSAGE);
     }
 }
 private void loadDefaultImage(JLabel label) {

@@ -30,7 +30,7 @@ public class PaymentPage extends javax.swing.JFrame {
         this.idPanier = idPanier;
         this.finalPrice = totalPrice; // Stockez totalPrice
         initComponents();
-        TotalPrice.setText("Total: " + finalPrice + " €"); // Affichez totalPrice dans le JLabel
+        TotalPrice.setText("Total: " + finalPrice + " £"); // Affichez totalPrice dans le JLabel
 }
 
     /**

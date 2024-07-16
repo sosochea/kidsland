@@ -218,14 +218,14 @@ public class WelcomePage extends javax.swing.JFrame {
         
         int rowsAffected = pstmt.executeUpdate();
         if (rowsAffected > 0) {
-            JOptionPane.showMessageDialog(this, "Invité ajouté avec succès !");
+            JOptionPane.showMessageDialog(this, "Guest added successfully!");
             Session.setUserEmail(email); // Stocker l'email dans la session
         } else {
-            JOptionPane.showMessageDialog(this, "Échec de l'ajout de l'invité.");
+            JOptionPane.showMessageDialog(this, "Failed to add guest.");
         }
     } catch (Exception e) {
         e.printStackTrace();
-        JOptionPane.showMessageDialog(this, "Erreur lors de l'ajout de l'invité : " + e.getMessage());
+        JOptionPane.showMessageDialog(this, "Error adding guest : " + e.getMessage());
     }
 }
 
