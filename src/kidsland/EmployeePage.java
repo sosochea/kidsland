@@ -142,7 +142,7 @@ reservations.setVisible(true);
     }
     
     // Affiche la page d'accueil
-    accueil Accueil = new accueil();
+    WelcomePage Accueil = new WelcomePage();
     Accueil.setVisible(true);
     }//GEN-LAST:event_jButton4ActionPerformed
 

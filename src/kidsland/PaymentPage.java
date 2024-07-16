@@ -248,8 +248,7 @@ public class PaymentPage extends javax.swing.JFrame {
 
     private void jMenu2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu2ActionPerformed
         // TODO add your handling code here:
-        new DiscoverPage().setVisible(true);
-        this.setVisible(true);
+        
     }//GEN-LAST:event_jMenu2ActionPerformed
 
     private void jMenu4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu4ActionPerformed

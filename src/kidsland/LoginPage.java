@@ -220,7 +220,6 @@ public class LoginPage extends javax.swing.JFrame {
     }//GEN-LAST:event_jShowPWActionPerformed
 
     private void jLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jLoginActionPerformed
-
         String un = jMail.getText();
         String ps = new String(jPass.getPassword());
 
@@ -234,11 +233,17 @@ public class LoginPage extends javax.swing.JFrame {
             rs = pst.executeQuery();
 
             if (rs.next()) {
+                String role = rs.getString("role");
                 JOptionPane.showMessageDialog(rootPane, "Your Login was successful");
                 Session.setUserEmail(un);
-                new WelcomePage(un).setVisible(true);
-                new LoginPage().disable();
-                new BookingPage().setVisible(true);
+
+                if ("customer".equals(role)) {
+                    new BookingPage().setVisible(true);
+                } else if ("employee".equals(role)) {
+                    new EmployeePage().setVisible(true);
+                }
+
+                this.setVisible(false); // Hide the login page
             } else {
                 JOptionPane.showMessageDialog(rootPane, "Your Login failed");
             }
