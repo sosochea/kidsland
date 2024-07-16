@@ -9,7 +9,7 @@ public class Mysqlc {
         Connection conn = null;
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/kidsland4", "root","root");
+            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/kidsland2", "root","soso");
             System.out.println("Connection established successfully");
         } catch (ClassNotFoundException e) {
             e.printStackTrace();

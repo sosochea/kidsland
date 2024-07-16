@@ -7,6 +7,7 @@ package kidsland;
 import javax.swing.JOptionPane;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.time.Year;
 
 
 /**
@@ -213,38 +214,54 @@ public class RegisterPage extends javax.swing.JFrame {
     }//GEN-LAST:event_jShowPWActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-        String nam = jName.getText();
-        String em = jEmail.getText();
-        String ps = jPW.getText();
-        String bd = jBD.getText(); 
+    String nam = jName.getText();
+    String em = jEmail.getText();
+    String ps = jPW.getText();
+    String bd = jBD.getText(); 
 
-        String query = "INSERT INTO people (nom, mail, mot_de_passe) VALUES (?, ?, ?)";
+    // Calcul de l'âge
+    int currentYear = Year.now().getValue();
+    int birthYear = Integer.parseInt(bd);
+    int age = currentYear - birthYear;
+    double discount;
 
-        try {
-            Connection conn = Mysqlc.mycon(); 
-            PreparedStatement pstmt = conn.prepareStatement(query);
-            
-            pstmt.setString(1, nam);
-            pstmt.setString(2, em);
-            pstmt.setString(3, ps);
-            
-            pstmt.executeUpdate();
-            
-            JOptionPane.showMessageDialog(rootPane, "Your account is created, Please LogIn");
+    // Détermination du discount
+    if (age <= 18) {
+        discount = 20.0;
+    } else if (age > 60) {
+        discount = 30.0;
+    } else {
+        discount = 10.0;
+    }
 
-            this.setVisible(false);
-            new LoginPage().setVisible(true);
+    String query = "INSERT INTO people (nom, mail, mot_de_passe, annee_naissance, role, discount) VALUES (?, ?, ?, ?, 'customer', ?)";
 
-        } catch (Exception e) {
-            e.printStackTrace();
-            JOptionPane.showMessageDialog(rootPane, "Error when creating your account: " + e.getMessage());
-        } finally {
-            jName.setText("");
-            jEmail.setText("");
-            jPW.setText("");
-            jBD.setText("");
-        }
+    try {
+        Connection conn = Mysqlc.mycon(); 
+        PreparedStatement pstmt = conn.prepareStatement(query);
+
+        pstmt.setString(1, nam);
+        pstmt.setString(2, em);
+        pstmt.setString(3, ps);
+        pstmt.setInt(4, birthYear);
+        pstmt.setDouble(5, discount);
+
+        pstmt.executeUpdate();
+
+        JOptionPane.showMessageDialog(rootPane, "Your account is created, Please LogIn");
+
+        this.setVisible(false);
+        new LoginPage().setVisible(true);
+
+    } catch (Exception e) {
+        e.printStackTrace();
+        JOptionPane.showMessageDialog(rootPane, "Error when creating your account: " + e.getMessage());
+    } finally {
+        jName.setText("");
+        jEmail.setText("");
+        jPW.setText("");
+        jBD.setText("");
+    }
 
         
     }//GEN-LAST:event_jButton2ActionPerformed
