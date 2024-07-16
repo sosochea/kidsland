@@ -145,11 +145,6 @@ public class RecapPage extends javax.swing.JFrame {
         jDiscount = new javax.swing.JLabel();
         jT = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        jMenu2 = new javax.swing.JMenu();
-        jMenu4 = new javax.swing.JMenu();
-        jMenu3 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -331,40 +326,6 @@ public class RecapPage extends javax.swing.JFrame {
 
         jLabel8.setText("Total Price :");
 
-        jMenu1.setText("Welcome");
-        jMenu1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenu1ActionPerformed(evt);
-            }
-        });
-        jMenuBar1.add(jMenu1);
-
-        jMenu2.setText("Discover");
-        jMenu2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenu2ActionPerformed(evt);
-            }
-        });
-        jMenuBar1.add(jMenu2);
-
-        jMenu4.setText("Booking");
-        jMenu4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenu4ActionPerformed(evt);
-            }
-        });
-        jMenuBar1.add(jMenu4);
-
-        jMenu3.setText("MyAccount");
-        jMenu3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenu3ActionPerformed(evt);
-            }
-        });
-        jMenuBar1.add(jMenu3);
-
-        setJMenuBar(jMenuBar1);
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -488,7 +449,7 @@ public class RecapPage extends javax.swing.JFrame {
                             .addComponent(jRIDE4)
                             .addComponent(jBo4)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 112, Short.MAX_VALUE)
+                        .addGap(0, 123, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(JTP4, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jP4, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -539,7 +500,7 @@ public class RecapPage extends javax.swing.JFrame {
                         .addComponent(JTP9, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(JTP10, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(jTP))
@@ -557,30 +518,6 @@ public class RecapPage extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jMenu1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu1ActionPerformed
-        // TODO add your handling code here:
-        new WelcomePage().setVisible(true);
-        this.setVisible(true);
-    }//GEN-LAST:event_jMenu1ActionPerformed
-
-    private void jMenu2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu2ActionPerformed
-        // TODO add your handling code here:
-       
-    }//GEN-LAST:event_jMenu2ActionPerformed
-
-    private void jMenu4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu4ActionPerformed
-        // TODO add your handling code here:
-        new BookingPage().setVisible(true);
-        this.setVisible(true);
-    }//GEN-LAST:event_jMenu4ActionPerformed
-
-    private void jMenu3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu3ActionPerformed
-        // TODO add your handling code here:
-        new MemberPage().setVisible(true);
-        new EmployeePage().setVisible(true);
-        this.setVisible(true);
-    }//GEN-LAST:event_jMenu3ActionPerformed
 
     private void jPayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPayActionPerformed
         // TODO add your handling code here:
@@ -848,11 +785,6 @@ public class RecapPage extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenu jMenu3;
-    private javax.swing.JMenu jMenu4;
-    private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JLabel jP1;
     private javax.swing.JLabel jP10;
     private javax.swing.JLabel jP2;

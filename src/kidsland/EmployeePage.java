@@ -6,6 +6,14 @@ package kidsland;
 import javax.swing.*;
 import java.awt.*;
 
+import javax.imageio.ImageIO;
+import javax.swing.*;
+import java.awt.*;
+import java.io.ByteArrayInputStream;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+
 /**
  *
  * @author Cheas
@@ -19,8 +27,54 @@ public class EmployeePage extends javax.swing.JFrame {
         initComponents();
         String userName = Session.getUserName();
         jLabel1.setText("Welcome " + userName);
+        loadUserPhoto(userName);
     
     }
+    
+        private void loadUserPhoto(String userName) {
+        String query = "SELECT photo FROM people WHERE nom = ?";
+        Connection conn = null;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        try {
+            conn = Mysqlc.mycon();
+            if (conn != null) {
+                pstmt = conn.prepareStatement(query);
+                pstmt.setString(1, userName);
+                rs = pstmt.executeQuery();
+                if (rs.next()) {
+                    byte[] imgBytes = rs.getBytes("photo");
+                    if (imgBytes != null) {
+                        ByteArrayInputStream bis = new ByteArrayInputStream(imgBytes);
+                        Image image = ImageIO.read(bis);
+                        if (image != null) {
+                            Image scaledImage = image.getScaledInstance(jphoto.getWidth(), jphoto.getHeight(), Image.SCALE_SMOOTH);
+                            ImageIcon imageIcon = new ImageIcon(scaledImage);
+                            jphoto.setIcon(imageIcon);
+                            jphoto.setHorizontalAlignment(JLabel.CENTER);
+                            jphoto.setVerticalAlignment(JLabel.CENTER);
+                        }
+                    } else {
+                        JOptionPane.showMessageDialog(this, "No image found for this user.");
+                    }
+                }
+            } else {
+                JOptionPane.showMessageDialog(this, "Database connection failed.");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Error when loading image: " + e.getMessage());
+        } finally {
+            try {
+                if (rs != null) rs.close();
+                if (pstmt != null) pstmt.close();
+                if (conn != null) conn.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -36,6 +90,7 @@ public class EmployeePage extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
+        jphoto = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -77,6 +132,8 @@ public class EmployeePage extends javax.swing.JFrame {
             }
         });
 
+        jphoto.setText("jLabel3");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -96,11 +153,14 @@ public class EmployeePage extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(147, 147, 147)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(180, 180, 180)
-                        .addComponent(jButton5)))
+                        .addComponent(jButton5))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(147, 147, 147)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(163, 163, 163)
+                        .addComponent(jphoto, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -109,7 +169,9 @@ public class EmployeePage extends javax.swing.JFrame {
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 58, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jphoto, javax.swing.GroupLayout.DEFAULT_SIZE, 181, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(jButton2))
@@ -197,6 +259,7 @@ reservations.setVisible(true);
     private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jphoto;
     // End of variables declaration//GEN-END:variables
     /*private void setFullScreen() {
     GraphicsEnvironment graphics = GraphicsEnvironment.getLocalGraphicsEnvironment();

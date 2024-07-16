@@ -27,38 +27,40 @@ public class BookingPage extends javax.swing.JFrame {
     /**
      * Creates new form BookingPage
      */
-    public BookingPage() {
-        
-        initComponents();
-        String userEmail = Session.getUserEmail();
-        initializePanierPrincipal(userEmail); 
-       
-        loadPrice(2, jP1 );
-        loadPrice(3, jP2 );
-        loadPrice(4, jP3 );
-        loadPrice(5, jP4 );
-        loadPrice(6, jP5 );
-        loadPrice(7, jP6 );
-        loadPrice(8, jP7 );
-        loadPrice(9, jP8 );
-        loadPrice(10, jP9 );
+    public BookingPage(int idPeople) {
+    this.idPeople = idPeople;
+    initComponents();
+    String userEmail = Session.getUserEmail();
+    initializePanierPrincipal(userEmail); 
 
-        loadImage("2", photo1);
-        loadImage("3", photo2);
-        loadImage("4", photo3);
-        loadImage("5", photo4);
-        loadImage("6", photo5);
-        loadImage("7", photo6);
-        loadImage("8", photo7);
-        loadImage("9", photo8);
-        loadImage("10", photo9);
-    }
+    loadPrice(2, jP1 );
+    loadPrice(3, jP2 );
+    loadPrice(4, jP3 );
+    loadPrice(5, jP4 );
+    loadPrice(6, jP5 );
+    loadPrice(7, jP6 );
+    loadPrice(8, jP7 );
+    loadPrice(9, jP8 );
+    loadPrice(10, jP9 );
+
+    loadImage("2", photo1);
+    loadImage("3", photo2);
+    loadImage("4", photo3);
+    loadImage("5", photo4);
+    loadImage("6", photo5);
+    loadImage("7", photo6);
+    loadImage("8", photo7);
+    loadImage("9", photo8);
+    loadImage("10", photo9);
+}
+
     
     private void initializePanierPrincipal(String userEmail) {
-        Connection conn = null;
-        try {
-            conn = Mysqlc.mycon();
+    Connection conn = null;
+    try {
+        conn = Mysqlc.mycon();
 
+        if (idPeople == 0 && userEmail != null) {
             // Récupérer l'identifiant de l'utilisateur (idPeople) basé sur l'email (userEmail)
             String getUserIdQuery = "SELECT id FROM people WHERE mail = ?";
             try (PreparedStatement getUserIdStmt = conn.prepareStatement(getUserIdQuery)) {
@@ -71,40 +73,42 @@ public class BookingPage extends javax.swing.JFrame {
                     }
                 }
             }
+        }
 
-            Random random = new Random();
-            boolean idExists;
-            do {
-                idPanier = random.nextInt(100000); // Générer un ID aléatoire
-                String checkQuery = "SELECT id FROM panierprincipal WHERE id = ?";
-                try (PreparedStatement checkStmt = conn.prepareStatement(checkQuery)) {
-                    checkStmt.setInt(1, idPanier);
-                    try (ResultSet rs = checkStmt.executeQuery()) {
-                        idExists = rs.next();
-                    }
+        Random random = new Random();
+        boolean idExists;
+        do {
+            idPanier = random.nextInt(100000); // Générer un ID aléatoire
+            String checkQuery = "SELECT id FROM panierprincipal WHERE id = ?";
+            try (PreparedStatement checkStmt = conn.prepareStatement(checkQuery)) {
+                checkStmt.setInt(1, idPanier);
+                try (ResultSet rs = checkStmt.executeQuery()) {
+                    idExists = rs.next();
                 }
-            } while (idExists);
+            }
+        } while (idExists);
 
-            String insertPanierPrincipalQuery = "INSERT INTO panierprincipal (id, dateCreation, idPeople) VALUES (?, ?, ?)";
-            try (PreparedStatement pstmt = conn.prepareStatement(insertPanierPrincipalQuery)) {
-                pstmt.setInt(1, idPanier);
-                pstmt.setDate(2, new java.sql.Date(System.currentTimeMillis()));
-                pstmt.setInt(3, idPeople);  // Ajouter idPeople
-                pstmt.executeUpdate();
+        String insertPanierPrincipalQuery = "INSERT INTO panierprincipal (id, dateCreation, idPeople) VALUES (?, ?, ?)";
+        try (PreparedStatement pstmt = conn.prepareStatement(insertPanierPrincipalQuery)) {
+            pstmt.setInt(1, idPanier);
+            pstmt.setDate(2, new java.sql.Date(System.currentTimeMillis()));
+            pstmt.setInt(3, idPeople);  // Ajouter idPeople
+            pstmt.executeUpdate();
+        }
+    } catch (Exception e) {
+        e.printStackTrace();
+        JOptionPane.showMessageDialog(this, "Erreur lors de l'initialisation du panier principal : " + e.getMessage());
+    } finally {
+        try {
+            if (conn != null) {
+                conn.close();
             }
         } catch (Exception e) {
             e.printStackTrace();
-            JOptionPane.showMessageDialog(this, "Erreur lors de l'initialisation du panier principal : " + e.getMessage());
-        } finally {
-            try {
-                if (conn != null) {
-                    conn.close();
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
         }
     }
+}
+
 
 
 
@@ -175,11 +179,6 @@ public class BookingPage extends javax.swing.JFrame {
         jADD10 = new javax.swing.JButton();
         jADD8 = new javax.swing.JButton();
         jPriceTotal = new javax.swing.JLabel();
-        jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        jMenu2 = new javax.swing.JMenu();
-        jMenu4 = new javax.swing.JMenu();
-        jMenu3 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -316,40 +315,6 @@ public class BookingPage extends javax.swing.JFrame {
         });
 
         jPriceTotal.setText("PRICE");
-
-        jMenu1.setText("Welcome");
-        jMenu1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenu1ActionPerformed(evt);
-            }
-        });
-        jMenuBar1.add(jMenu1);
-
-        jMenu2.setText("Discover");
-        jMenu2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenu2ActionPerformed(evt);
-            }
-        });
-        jMenuBar1.add(jMenu2);
-
-        jMenu4.setText("Booking");
-        jMenu4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenu4ActionPerformed(evt);
-            }
-        });
-        jMenuBar1.add(jMenu4);
-
-        jMenu3.setText("MyAccount");
-        jMenu3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenu3ActionPerformed(evt);
-            }
-        });
-        jMenuBar1.add(jMenu3);
-
-        setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -536,8 +501,7 @@ public class BookingPage extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jScrollBar2, javax.swing.GroupLayout.PREFERRED_SIZE, 322, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(filler1, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())
+                        .addComponent(filler1, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(10, 10, 10)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -599,35 +563,12 @@ public class BookingPage extends javax.swing.JFrame {
                             .addComponent(jLabel13)
                             .addComponent(jPAY)
                             .addComponent(jPriceTotal))
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                        .addGap(0, 0, 0)))
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jMenu1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu1ActionPerformed
-        // TODO add your handling code here:
-        new WelcomePage().setVisible(true);
-        this.setVisible(true);
-    }//GEN-LAST:event_jMenu1ActionPerformed
-
-    private void jMenu2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu2ActionPerformed
-        // TODO add your handling code here:
-        
-    }//GEN-LAST:event_jMenu2ActionPerformed
-
-    private void jMenu4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu4ActionPerformed
-        // TODO add your handling code here:
-        new BookingPage().setVisible(true);
-        this.setVisible(true);
-    }//GEN-LAST:event_jMenu4ActionPerformed
-
-    private void jMenu3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu3ActionPerformed
-        // TODO add your handling code here:
-        new MemberPage().setVisible(true);
-        new EmployeePage().setVisible(true);
-        this.setVisible(true);
-    }//GEN-LAST:event_jMenu3ActionPerformed
 
     private void photo1InputMethodTextChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_photo1InputMethodTextChanged
         // TODO add your handling code here:
@@ -1446,7 +1387,7 @@ public class BookingPage extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new BookingPage().setVisible(true);
+                
             }
         });
     }
@@ -1463,6 +1404,7 @@ public class BookingPage extends javax.swing.JFrame {
     private javax.swing.JButton jADD7;
     private javax.swing.JButton jADD8;
     private javax.swing.JButton jADD9;
+    private javax.swing.JButton jButton4;
     private com.toedter.calendar.JDateChooser jDC1;
     private com.toedter.calendar.JDateChooser jDC10;
     private com.toedter.calendar.JDateChooser jDC2;
@@ -1476,11 +1418,6 @@ public class BookingPage extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenu jMenu3;
-    private javax.swing.JMenu jMenu4;
-    private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JLabel jP1;
     private javax.swing.JLabel jP10;
     private javax.swing.JLabel jP2;

@@ -52,11 +52,6 @@ public class LoginPage extends javax.swing.JFrame {
         jShowPW = new javax.swing.JCheckBox();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        jMenu2 = new javax.swing.JMenu();
-        jMenu4 = new javax.swing.JMenu();
-        jMenu3 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -148,37 +143,6 @@ public class LoginPage extends javax.swing.JFrame {
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/kidsland/LogoKidsLand.png"))); // NOI18N
         jLabel6.setText("jLabel6");
 
-        jMenu1.setText("Welcome");
-        jMenu1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jMenu1MouseClicked(evt);
-            }
-        });
-        jMenu1.addInputMethodListener(new java.awt.event.InputMethodListener() {
-            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
-                jMenu1CaretPositionChanged(evt);
-            }
-            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
-            }
-        });
-        jMenu1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenu1ActionPerformed(evt);
-            }
-        });
-        jMenuBar1.add(jMenu1);
-
-        jMenu2.setText("Discover");
-        jMenuBar1.add(jMenu2);
-
-        jMenu4.setText("Booking");
-        jMenuBar1.add(jMenu4);
-
-        jMenu3.setText("MyAccount");
-        jMenuBar1.add(jMenu3);
-
-        setJMenuBar(jMenuBar1);
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -195,7 +159,7 @@ public class LoginPage extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addComponent(jLabel6)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 56, Short.MAX_VALUE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(61, 61, 61))
         );
@@ -221,53 +185,46 @@ public class LoginPage extends javax.swing.JFrame {
 
     private void jLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jLoginActionPerformed
         String un = jMail.getText();
-        String ps = new String(jPass.getPassword());
+    String ps = new String(jPass.getPassword());
 
-        try {
-            String sql = "SELECT * FROM people WHERE mail = ? AND mot_de_passe = ?";
-            pst = con.prepareStatement(sql);
+    try {
+        Connection con = Mysqlc.mycon(); 
+        String sql = "SELECT * FROM people WHERE mail = ? AND mot_de_passe = ?";
+        PreparedStatement pst = con.prepareStatement(sql);
 
-            pst.setString(1, un);
-            pst.setString(2, ps);
+        pst.setString(1, un);
+        pst.setString(2, ps);
 
-            rs = pst.executeQuery();
+        ResultSet rs = pst.executeQuery();
 
-            if (rs.next()) {
-                String role = rs.getString("role");
-                JOptionPane.showMessageDialog(rootPane, "Your Login was successful");
-                Session.setUserEmail(un);
+        if (rs.next()) {
+            String userEmail = rs.getString("mail");
+            String userName = rs.getString("nom"); // Assuming 'nom' is the column name for the user's name
 
-                if ("customer".equals(role)) {
-                    new BookingPage().setVisible(true);
-                } else if ("employee".equals(role)) {
-                    new EmployeePage().setVisible(true);
-                }
+            // Set user's email and name in Session
+            Session.setUserEmail(userEmail);
+            Session.setUserName(userName);
 
-                this.setVisible(false); // Hide the login page
+            // Determine role
+            String role = rs.getString("Role");
+            if ("member".equalsIgnoreCase(role)) { // Ignore case to match 'Member' or 'member'
+                new WelcomePage().setVisible(true);
             } else {
-                JOptionPane.showMessageDialog(rootPane, "Your Login failed");
+                new EmployeePage().setVisible(true);
             }
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(rootPane, e);
+            this.setVisible(false); // Hide login page after successful login
+        } else {
+            JOptionPane.showMessageDialog(rootPane, "Your login failed");
         }
+    } catch (Exception e) {
+        JOptionPane.showMessageDialog(rootPane, "Error: " + e.getMessage());
+    }
     }//GEN-LAST:event_jLoginActionPerformed
 
     private void jMailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMailActionPerformed
         // TODO add your handling code here:
 
     }//GEN-LAST:event_jMailActionPerformed
-
-    private void jMenu1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jMenu1ActionPerformed
-
-    private void jMenu1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu1MouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jMenu1MouseClicked
-
-    private void jMenu1CaretPositionChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_jMenu1CaretPositionChanged
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jMenu1CaretPositionChanged
 
     /**
      * @param args the command line arguments
@@ -312,11 +269,6 @@ public class LoginPage extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JButton jLogin;
     private javax.swing.JTextField jMail;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenu jMenu3;
-    private javax.swing.JMenu jMenu4;
-    private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPasswordField jPass;
     private javax.swing.JCheckBox jShowPW;

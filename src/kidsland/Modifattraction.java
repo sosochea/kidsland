@@ -153,11 +153,6 @@ public class Modifattraction extends javax.swing.JFrame {
         jLabel20 = new javax.swing.JLabel();
         jLabel21 = new javax.swing.JLabel();
         jLabel22 = new javax.swing.JLabel();
-        jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        jMenu2 = new javax.swing.JMenu();
-        jMenu4 = new javax.swing.JMenu();
-        jMenu3 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -283,40 +278,6 @@ public class Modifattraction extends javax.swing.JFrame {
         jLabel21.setText("jLabel21");
 
         jLabel22.setText("jLabel22");
-
-        jMenu1.setText("Welcome");
-        jMenu1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenu1ActionPerformed(evt);
-            }
-        });
-        jMenuBar1.add(jMenu1);
-
-        jMenu2.setText("Discover");
-        jMenu2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenu2ActionPerformed(evt);
-            }
-        });
-        jMenuBar1.add(jMenu2);
-
-        jMenu4.setText("Booking");
-        jMenu4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenu4ActionPerformed(evt);
-            }
-        });
-        jMenuBar1.add(jMenu4);
-
-        jMenu3.setText("MyAccount");
-        jMenu3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenu3ActionPerformed(evt);
-            }
-        });
-        jMenuBar1.add(jMenu3);
-
-        setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -597,30 +558,6 @@ Addattraction.setVisible(true);
         JOptionPane.showMessageDialog(this, "ID non spécifié. L'opération a été annulée.", "Annulé", JOptionPane.INFORMATION_MESSAGE);
     }
     }//GEN-LAST:event_jButton4ActionPerformed
-
-    private void jMenu3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu3ActionPerformed
-        // TODO add your handling code here:
-        new MemberPage().setVisible(true);
-        new EmployeePage().setVisible(true);
-        this.setVisible(true);
-    }//GEN-LAST:event_jMenu3ActionPerformed
-
-    private void jMenu4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu4ActionPerformed
-        // TODO add your handling code here:
-        new Modifattraction().setVisible(true);
-        this.setVisible(true);
-    }//GEN-LAST:event_jMenu4ActionPerformed
-
-    private void jMenu2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu2ActionPerformed
-        // TODO add your handling code here:
-        
-    }//GEN-LAST:event_jMenu2ActionPerformed
-
-    private void jMenu1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu1ActionPerformed
-        // TODO add your handling code here:
-        new WelcomePage().setVisible(true);
-        this.setVisible(true);
-    }//GEN-LAST:event_jMenu1ActionPerformed
 private void supprimerAttraction(int attractionId) {
     String query = "DELETE FROM ride WHERE id = ?";
 
@@ -939,11 +876,6 @@ private void loadDefaultImage(JLabel label) {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenu jMenu3;
-    private javax.swing.JMenu jMenu4;
-    private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JLabel jP1;
     private javax.swing.JLabel jP10;
     private javax.swing.JLabel jP2;

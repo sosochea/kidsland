@@ -67,6 +67,8 @@ public class SendMail extends javax.swing.JFrame {
             }
         });
 
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 20)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(204, 51, 255));
         jLabel5.setText("SEND MAIL ");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -119,7 +121,7 @@ public class SendMail extends javax.swing.JFrame {
                     .addComponent(jMail, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jSEND)
-                .addContainerGap(16, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
